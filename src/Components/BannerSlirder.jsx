@@ -21,7 +21,7 @@ const slides = [
     title: "Connecting Souls, Building Futures.",
     description:
       "Experience seamless matchmaking with a community built on authenticity, respect, and cultural values.",
-    image: "https://i.ibb.co/1fVvvjHY/matri-4.webp"
+    image: "https://i.ibb.co/23jTXkGm/matri-5.webp"
   }
 ];
 
