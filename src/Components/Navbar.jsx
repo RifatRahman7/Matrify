@@ -22,6 +22,7 @@ const Navbar = () => {
         { name: 'About Us', path: '/about-us', icon: <Info className="w-4 h-4 mr-1" /> },
         { name: 'Contact Us', path: '/contact-us', icon: <Phone className="w-4 h-4 mr-1" /> },
         { name: 'Login', path: '/login', icon: <LogIn className="w-4 h-4 mr-1" /> },
+        { name: 'Register', path: '/register', icon: <LogIn className="w-4 h-4 mr-1" /> }
     ];
 
     const isActive = (path) => location.pathname === path;
