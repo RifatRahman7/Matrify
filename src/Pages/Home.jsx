@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
-import BannerSlider from '../Components/BannerSlirder';
+import BannerSlider from '../Components/BannerSlider';
 import PremiumMembers from '../Components/PremiumMembers';
 import HowItWorks from '../Components/HowItWorks';
 import SuccessCounter from '../Components/SuccessCounter';
