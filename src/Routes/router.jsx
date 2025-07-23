@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import BiodatasPage from "../Components/BioDatas";
+import AboutUs from "../Components/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
              {
                 path: "/biodatas",
                 Component:BiodatasPage
+            },
+            {
+                path: "/about-us",
+                Component:AboutUs
             },
         ]
     },
