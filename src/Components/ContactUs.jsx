@@ -1,6 +1,7 @@
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { Phone } from "lucide-react";
 
 const ContactUs = () => {
   return (
@@ -9,9 +10,14 @@ const ContactUs = () => {
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
         <section className="w-full max-w-4xl mx-auto bg-white/40 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 md:p-12">
-          <h1 className="text-4xl font-extrabold text-gray-800 mb-2 tracking-tight drop-shadow text-center">
-            Contact Us
-          </h1>
+          <div className="flex items-center justify-center mb-2">
+            <span className="inline-flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-400 rounded-full p-3 shadow-lg mr-3">
+              <Phone className="text-white w-7 h-7" />
+            </span>
+            <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight drop-shadow text-center">
+              Contact Us
+            </h1>
+          </div>
           <p className="text-lg text-gray-700 mb-8 text-center">
             We’re here to help! Reach out to us for any queries, support, or feedback.
           </p>

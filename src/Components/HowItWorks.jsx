@@ -41,7 +41,7 @@ const HowItWorks = () => {
   return (
     <section className="bg-gradient-to-br from-green-50 via-white to-blue-50 py-20 px-4 md:px-8 roboto">
       <div className="max-w-6xl mx-auto text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 tracking-tight">
+        <h2 className="text-3xl md:text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">
           How Matrify Works
         </h2>
         <p className="text-gray-600 text-lg md:text-xl">
