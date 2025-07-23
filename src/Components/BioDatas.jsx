@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fa';
 import Navbar from './Navbar';
 import Footer from './Footer';
+
 const divisions = [
   'Dhaka',
   'Chattagram',
@@ -30,6 +31,7 @@ export default function BiodatasPage() {
 
   useEffect(() => {
     fetchBiodatas();
+    // eslint-disable-next-line
   }, [filters]);
 
   const fetchBiodatas = async () => {
@@ -41,25 +43,26 @@ export default function BiodatasPage() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="min-h-screen roboto flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50">
       <Navbar />
 
-      <div className="flex flex-col lg:flex-row flex-grow p-4 gap-6">
-        {/* Filter Sidebar (Top on Mobile, Side on Desktop) */}
-        <div className="w-full lg:w-64 bg-white/60 backdrop-blur-md rounded-xl shadow-lg p-4 space-y-4 h-fit md:sticky top-24">
-          <h2 className="text-lg font-bold flex items-center gap-2 text-gray-700">
-            <FaFilter /> Filter
+      <div className="flex flex-col lg:flex-row flex-grow p-4 gap-8 max-w-7xl mx-auto w-full">
+        {/* Filter Sidebar */}
+        <div className="w-full lg:w-72 bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-6 space-y-6 h-fit md:sticky top-24 border border-gray-100">
+          <h2 className="text-xl font-bold flex items-center gap-2 text-primary-700">
+            <FaFilter className="text-green-500" /> Filter
           </h2>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
               Biodata Type
             </label>
             <select
               onChange={(e) =>
                 setFilters({ ...filters, type: e.target.value })
               }
-              className="mt-1 w-full p-2 border rounded-md text-sm"
+              className="mt-1 w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
+              value={filters.type}
             >
               <option value="">All</option>
               <option value="Male">Male</option>
@@ -68,14 +71,15 @@ export default function BiodatasPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
               Division
             </label>
             <select
               onChange={(e) =>
                 setFilters({ ...filters, division: e.target.value })
               }
-              className="mt-1 w-full p-2 border rounded-md text-sm"
+              className="mt-1 w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
+              value={filters.division}
             >
               <option value="">All</option>
               {divisions.map((div) => (
@@ -87,7 +91,7 @@ export default function BiodatasPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
               Age Range
             </label>
             <div className="flex items-center gap-2 mt-1">
@@ -98,7 +102,9 @@ export default function BiodatasPage() {
                 onChange={(e) =>
                   setFilters({ ...filters, minAge: e.target.value })
                 }
-                className="w-1/2 p-2 border rounded-md text-sm"
+                className="w-1/2 p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
+                min={18}
+                max={filters.maxAge}
               />
               <input
                 type="number"
@@ -107,39 +113,49 @@ export default function BiodatasPage() {
                 onChange={(e) =>
                   setFilters({ ...filters, maxAge: e.target.value })
                 }
-                className="w-1/2 p-2 border rounded-md text-sm"
+                className="w-1/2 p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
+                min={filters.minAge}
+                max={80}
               />
             </div>
           </div>
         </div>
 
         {/* Biodata Cards */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {biodatas.length === 0 && (
+            <div className="col-span-full text-center text-gray-400 text-lg py-16">
+              No biodata found for selected filters.
+            </div>
+          )}
           {biodatas.map((biodata) => (
             <div
               key={biodata._id}
-              className="bg-white rounded-xl shadow-md p-6 text-center hover:scale-105 transition-transform duration-300"
+              className="bg-white/90 rounded-2xl shadow-lg p-7 text-center border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden"
             >
+              <div className="absolute inset-0 bg-gradient-to-t from-green-100/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
               <img
                 src={biodata.profileImage}
                 alt="Profile"
-                className="w-28 h-28 rounded-full mx-auto object-cover shadow"
+                className="w-28 h-28 rounded-full mx-auto object-cover shadow-lg border-4 border-green-100 group-hover:border-green-300 transition"
               />
-              <h3 className="text-xl mt-3 font-semibold text-gray-800 flex items-center justify-center gap-2">
+              <h3 className="text-2xl mt-4 font-bold text-gray-800 flex items-center justify-center gap-2">
                 <FaUser className="text-green-500" />
                 {biodata.biodataType}
               </h3>
-              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center">
-                <FaIdBadge /> ID: {biodata.biodataId}
+              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center mt-1">
+                <FaIdBadge className="text-blue-400" /> <span className="font-medium">ID:</span> {biodata.biodataId}
               </p>
-              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center">
-                <FaMapMarkerAlt /> {biodata.permanentDivision}
+              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center mt-1">
+                <FaMapMarkerAlt className="text-pink-400" /> {biodata.permanentDivision}
               </p>
-              <p className="text-gray-500 text-sm">Age: {biodata.age}</p>
-              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center">
-                <FaBriefcase /> {biodata.occupation}
+              <p className="text-gray-600 text-base font-semibold mt-2">
+                Age: <span className="text-green-600">{biodata.age}</span>
               </p>
-              <button className="mt-4 bg-green-600 text-white px-5 py-2 rounded-full text-sm hover:bg-green-700 transition">
+              <p className="text-gray-500 text-sm flex justify-center gap-1 items-center mt-1">
+                <FaBriefcase className="text-yellow-500" /> {biodata.occupation}
+              </p>
+              <button className="mt-5 bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-2 cursor-pointer rounded-full text-base font-semibold shadow hover:from-green-600 hover:to-blue-600 transition-all duration-200 hover:scale-105">
                 View Profile
               </button>
             </div>
