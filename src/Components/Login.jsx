@@ -1,11 +1,70 @@
-import { Link } from "react-router";
+import { useState, useContext } from "react";
+import { Link, useNavigate, useLocation } from "react-router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
+import Swal from 'sweetalert2';
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    try {
+      const result = await signIn(email, password);
+      const user = result.user;
+      Swal.fire({
+        title: 'Login Successful!',
+        text: `Welcome ${user?.displayName || "Back"}!`,
+        icon: 'success',
+        confirmButtonColor: '#16a34a',
+        confirmButtonText: 'OK'
+      });
+      setTimeout(() => {
+        navigate(location.state?.from || "/", { replace: true });
+      }, 500);
+    } catch (err) {
+      setErrorMsg("Invalid email or password. Please try again.");
+      toast.error("Login failed: " + err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await googleSignIn(provider);
+      const user = result.user;
+      Swal.fire({
+        title: 'Login Successful!',
+        text: `Logged in with Google as ${user?.displayName}`,
+        icon: 'success',
+        confirmButtonColor: '#16a34a',
+        confirmButtonText: 'OK'
+      });
+      setTimeout(() => {
+        navigate(location.state?.from || "/", { replace: true });
+      }, 500);
+    } catch (err) {
+      setErrorMsg("Google login failed.");
+      toast.error("Google Login Error: " + err.message);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 roboto">
+      <ToastContainer theme="colored" />
       {/* Navbar */}
       <Navbar />
 
@@ -23,7 +82,10 @@ const Login = () => {
           </div>
 
           {/* Login Form */}
-          <div className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 transition-all duration-500 hover:shadow-gray-400">
+          <form
+            onSubmit={handleLogin}
+            className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 transition-all duration-500 hover:shadow-gray-400"
+          >
             <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-7 tracking-tight drop-shadow">
               Login to continue!
             </h2>
@@ -38,6 +100,9 @@ const Login = () => {
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 bg-white/60 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
 
@@ -51,11 +116,20 @@ const Login = () => {
                 type="password"
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 bg-white/60 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
 
+            {/* Error Message */}
+            {errorMsg && <p className="text-sm text-red-500 mb-3">{errorMsg}</p>}
+
             {/* Login Button */}
-            <button className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-2 rounded-lg shadow-lg transition duration-300 cursor-pointer">
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-2 rounded-lg shadow-lg transition duration-300 cursor-pointer"
+            >
               Login
             </button>
 
@@ -67,7 +141,11 @@ const Login = () => {
             </div>
 
             {/* Google Sign-In */}
-            <button className="w-full border border-gray-300 hover:border-gray-500 bg-white/70 text-gray-700 py-2 flex justify-center items-center rounded-lg transition duration-300 cursor-pointer shadow">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full border border-gray-300 hover:border-gray-500 bg-white/70 text-gray-700 py-2 flex justify-center items-center rounded-lg transition duration-300 cursor-pointer shadow"
+            >
               <FcGoogle className="mr-2 text-xl" />
               Sign in with Google
             </button>
@@ -82,7 +160,7 @@ const Login = () => {
                 Register Here
               </Link>
             </p>
-          </div>
+          </form>
         </div>
       </div>
 

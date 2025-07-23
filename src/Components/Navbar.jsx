@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Menu,
     X,
@@ -7,25 +7,151 @@ import {
     Info,
     Phone,
     LogIn,
-    LayoutDashboard
+    LayoutDashboard,
+    LogOut
 } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { AuthContext } from '../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
+    const { user, logOut } = useContext(AuthContext);
 
+    // Navigation items except auth
     const navItems = [
         { name: 'Home', path: '/', icon: <Home className="w-4 h-4 mr-1" /> },
         { name: 'Biodatas', path: '/biodatas', icon: <Users className="w-4 h-4 mr-1" /> },
         { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="w-4 h-4 mr-1" /> },
         { name: 'About Us', path: '/about-us', icon: <Info className="w-4 h-4 mr-1" /> },
         { name: 'Contact Us', path: '/contact-us', icon: <Phone className="w-4 h-4 mr-1" /> },
-        { name: 'Login', path: '/login', icon: <LogIn className="w-4 h-4 mr-1" /> },
-        { name: 'Register', path: '/register', icon: <LogIn className="w-4 h-4 mr-1" /> }
     ];
 
+    // Improved isActive for login/register
     const isActive = (path) => location.pathname === path;
+
+    // SweetAlert2 logout
+    const handleLogout = async () => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#16a34a',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout'
+        });
+        if (result.isConfirmed) {
+            await logOut();
+            Swal.fire({
+                title: 'Logged out!',
+                text: 'You have been logged out successfully.',
+                icon: 'success',
+                confirmButtonColor: '#16a34a',
+                timer: 1500,
+                showConfirmButton: false
+            });
+            navigate('/login');
+        }
+    };
+
+    // Auth buttons logic
+    const renderAuthButtons = () => {
+        if (user) {
+            return (
+                <div className="flex items-center space-x-2">
+                    {user.photoURL && (
+                        <img
+                            src={user.photoURL}
+                            alt="User"
+                            className="w-8 h-8 rounded-full border-2 border-green-400 shadow"
+                        />
+                    )}
+                    <button
+                        onClick={handleLogout}
+                        className="flex items-center px-4 py-2 rounded-full font-medium bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg transition-all duration-200 hover:from-green-600 hover:to-blue-600 cursor-pointer"
+                    >
+                        <LogOut className="w-4 h-4 mr-1" />
+                        Logout
+                    </button>
+                </div>
+            );
+        } else {
+            return (
+                <>
+                    <Link
+                        to="/login"
+                        className={`
+                            flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                            ${isActive('/login')
+                                ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                                : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                            }
+                        `}
+                    >
+                        <LogIn className="w-4 h-4 mr-1" />
+                        Login
+                    </Link>
+                    <Link
+                        to="/register"
+                        className={`
+                            flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                            ${isActive('/register')
+                                ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                                : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                            }
+                        `}
+                    >
+                        <LogIn className="w-4 h-4 mr-1" />
+                        Register
+                    </Link>
+                </>
+            );
+        }
+    };
+
+    // For mobile, show only Register if on /login, only Login if on /register
+    const renderMobileAuthButtons = () => {
+        if (user) {
+            return renderAuthButtons();
+        } else if (location.pathname === '/login') {
+            return (
+                <Link
+                    to="/register"
+                    className={`
+                        flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                        ${isActive('/register')
+                            ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                            : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                        }
+                    `}
+                >
+                    <LogIn className="w-4 h-4 mr-1" />
+                    Register
+                </Link>
+            );
+        } else if (location.pathname === '/register') {
+            return (
+                <Link
+                    to="/login"
+                    className={`
+                        flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                        ${isActive('/login')
+                            ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                            : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                        }
+                    `}
+                >
+                    <LogIn className="w-4 h-4 mr-1" />
+                    Login
+                </Link>
+            );
+        } else {
+            return renderAuthButtons();
+        }
+    };
 
     return (
         <nav className="sticky top-0 z-50 bg-white/40 backdrop-blur-xl shadow-lg border-b border-white/30">
@@ -60,6 +186,7 @@ const Navbar = () => {
                             {name}
                         </Link>
                     ))}
+                    {renderAuthButtons()}
                 </div>
 
                 {/* Hamburger Icon */}
@@ -99,6 +226,9 @@ const Navbar = () => {
                             {name}
                         </Link>
                     ))}
+                    <div className="flex flex-col space-y-2 mt-2">
+                        {renderMobileAuthButtons()}
+                    </div>
                 </div>
             </div>
         </nav>
