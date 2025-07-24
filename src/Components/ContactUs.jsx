@@ -24,21 +24,21 @@ const ContactUs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Contact Info */}
             <div className="flex flex-col gap-6">
-              <div className="bg-white/80 backdrop-blur-xl rounded-xl shadow-xl border border-white/40 p-6 flex items-center gap-4">
+              <div className="bg-white/80 backdrop-blur-xl rounded-xl hover:scale-105 transition  shadow-xl border border-white/40 p-6 flex items-center gap-4">
                 <FaEnvelope className="text-2xl text-blue-600" />
                 <div>
                   <h3 className="font-semibold text-gray-800">Email</h3>
                   <p className="text-gray-700">support@matrify.com</p>
                 </div>
               </div>
-              <div className="bg-white/80 backdrop-blur-xl rounded-xl shadow-xl border border-white/40 p-6 flex items-center gap-4">
+              <div className="bg-white/80 backdrop-blur-xl rounded-xl hover:scale-105 transition shadow-xl border border-white/40 p-6 flex items-center gap-4">
                 <FaPhoneAlt className="text-2xl text-green-600" />
                 <div>
                   <h3 className="font-semibold text-gray-800">Phone</h3>
                   <p className="text-gray-700">+880 1234 567890</p>
                 </div>
               </div>
-              <div className="bg-white/80 backdrop-blur-xl rounded-xl shadow-xl border border-white/40 p-6 flex items-center gap-4">
+              <div className="bg-white/80 backdrop-blur-xl rounded-xl shadow-xl hover:scale-105 transition border border-white/40 p-6 flex items-center gap-4">
                 <FaMapMarkerAlt className="text-2xl text-pink-600" />
                 <div>
                   <h3 className="font-semibold text-gray-800">Address</h3>

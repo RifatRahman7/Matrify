@@ -6,7 +6,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 
 const slides = [
   {
-    title: "Find the One. Matrify the Bond.",
+    title: "Find the One, Matrify the Bond.",
     description:
       "Discover genuine connections. Our platform brings tradition and technology together to help you find your perfect match.",
     image: "https://i.ibb.co/DgRBZnfX/matri-3.jpg"

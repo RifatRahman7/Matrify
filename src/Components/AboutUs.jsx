@@ -47,7 +47,7 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-8">
-            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-300 group">
+            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:shadow-3xl hover:scale-105 transition-all duration-300 group">
               <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gradient-to-r from-green-400 to-blue-400 p-3 rounded-full shadow-lg">
                 <FaUsers className="text-white text-2xl" />
               </div>
@@ -60,7 +60,7 @@ const AboutUs = () => {
                 <li>Active support and guidance</li>
               </ul>
             </div>
-            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-300 group">
+            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:scale-105  hover:shadow-3xl transition-all duration-300 group">
               <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gradient-to-r from-green-400 to-blue-400 p-3 rounded-full shadow-lg">
                 <FaHeart className="text-white text-2xl" />
               </div>
@@ -87,7 +87,7 @@ const AboutUs = () => {
               {team.map((member, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/70 backdrop-blur-lg rounded-xl shadow-xl border border-white/40 p-5 flex flex-col items-center w-60 hover:shadow-2xl transition"
+                  className="bg-white/70 backdrop-blur-lg rounded-xl hover:scale-105  shadow-2xl border border-white/40 p-5 flex flex-col items-center w-60 hover:shadow-2xl transition"
                 >
                   <img
                     src={member.img}

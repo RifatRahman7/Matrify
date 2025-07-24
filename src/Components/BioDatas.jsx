@@ -9,6 +9,8 @@ import {
 } from 'react-icons/fa';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const divisions = [
   'Dhaka',
@@ -33,6 +35,13 @@ export default function BiodatasPage() {
     fetchBiodatas();
     // eslint-disable-next-line
   }, [filters]);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
 
   const fetchBiodatas = async () => {
     const { minAge, maxAge, type, division } = filters;
@@ -128,10 +137,12 @@ export default function BiodatasPage() {
               No biodata found for selected filters.
             </div>
           )}
-          {biodatas.map((biodata) => (
+          {biodatas.map((biodata, idx) => (
             <div
               key={biodata._id}
-              className="bg-white/90 rounded-2xl shadow-lg p-7 text-center border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay={idx * 80}
+              className="bg-white/90 rounded-2xl shadow-lg p-7 text-center border border-gray-100 transition-all duration-200 hover:scale-105 group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-green-100/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
               <img
