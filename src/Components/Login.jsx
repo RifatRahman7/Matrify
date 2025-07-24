@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import Swal from 'sweetalert2';
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
-
+import axios from "axios";
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -46,6 +46,14 @@ const Login = () => {
     try {
       const result = await googleSignIn(provider);
       const user = result.user;
+
+      // Add user to MongoDB users collection
+      await axios.post("http://localhost:3000/users", {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+      });
+
       Swal.fire({
         title: 'Login Successful!',
         text: `Logged in with Google as ${user?.displayName}`,

@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Edit, User, Mail, Heart } from "lucide-react";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const quickLinks = [
   {
@@ -32,17 +33,30 @@ const quickLinks = [
 
 const DashboardHome = () => {
   const { user } = useContext(AuthContext);
+  const [dbUser, setDbUser] = useState(null);
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/users/${user.email}`)
+        .then(res => setDbUser(res.data))
+        .catch(() => setDbUser(null));
+    }
+  }, [user?.email]);
+
+  const displayName = dbUser?.name || user?.displayName || "User";
+  const displayPhoto = dbUser?.photoURL || user?.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png";
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
       <div className="w-full max-w-2xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 text-center">
         <img
-          src={user?.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png"}
+          src={displayPhoto}
           alt="User"
           className="w-20 h-20 rounded-full border-4 border-green-200 shadow mx-auto mb-4"
         />
         <h2 className="text-3xl font-bold text-gray-800 mb-2">
-          Welcome, {user?.displayName || "User"}!
+          Welcome, {displayName}!
         </h2>
         <p className="text-gray-600 mb-6">
           Manage your biodata, requests, and favourites from your dashboard.

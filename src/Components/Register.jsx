@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../Provider/AuthProvider';
+import axios from 'axios';
 
 const Register = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
@@ -38,7 +39,14 @@ const Register = () => {
     }
 
     createUser(email, password)
-      .then(() => {
+      .then(async () => {
+        // Create user in MongoDB
+        await axios.post("http://localhost:3000/users", {
+          name,
+          email,
+          photoURL: photo,
+        });
+
         Swal.fire({
           title: 'Registration Successful!',
           text: 'Your account has been created. Please login.',
@@ -46,7 +54,6 @@ const Register = () => {
           confirmButtonColor: '#16a34a',
           confirmButtonText: 'OK'
         });
-        // Do NOT setUser or updateUser here!
         navigate('/login');
       })
       .catch((error) => {
@@ -56,7 +63,14 @@ const Register = () => {
 
   const handleGoogleLogin = () => {
     googleSignIn()
-      .then((result) => {
+      .then(async (result) => {
+        // Add user to MongoDB users collection
+        await axios.post("http://localhost:3000/users", {
+          name: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL,
+        });
+
         toast.success('Logged in with Google as ' + result.user.displayName);
         navigate('/');
       })

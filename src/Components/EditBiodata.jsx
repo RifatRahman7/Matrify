@@ -1,16 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const divisions = [
-  "Dhaka",
-  "Chattagram",
-  "Rangpur",
-  "Barisal",
-  "Khulna",
-  "Mymensingh",
-  "Sylhet",
+  "Dhaka", "Chattagram", "Rangpur", "Barisal", "Khulna", "Mymensingh", "Sylhet",
 ];
 const heights = [
   "4'6''", "4'7''", "4'8''", "4'9''", "4'10''", "4'11''", "5'0''", "5'1''", "5'2''", "5'3''", "5'4''", "5'5''", "5'6''", "5'7''", "5'8''", "5'9''", "5'10''", "5'11''", "6'0''", "6'1''", "6'2''", "6'3''", "6'4''"
@@ -44,40 +38,25 @@ const EditBiodata = () => {
     expectedPartnerAge: "",
     expectedPartnerHeight: "",
     expectedPartnerWeight: "",
-    contactEmail: user?.email || "",
+    contactEmail: "",
     mobile: "",
   });
 
-  // Load existing biodata if exists
-  useEffect(() => {
-    if (user?.email) {
-      axios
-        .get(`http://localhost:3000/api/biodata/${user.email}`)
-        .then((res) => {
-          if (res.data) setForm({ ...form, ...res.data });
-        })
-        .catch(() => {});
-    }
-    // eslint-disable-next-line
-  }, [user?.email]);
-
   // Calculate age from dob
-  useEffect(() => {
-    if (form.dob) {
-      const birth = new Date(form.dob);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let updatedForm = { ...form, [name]: value };
+    if (name === "dob") {
+      const birth = new Date(value);
       const today = new Date();
       let age = today.getFullYear() - birth.getFullYear();
       const m = today.getMonth() - birth.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
         age--;
       }
-      setForm((prev) => ({ ...prev, age: age > 0 ? age : "" }));
+      updatedForm.age = age > 0 ? age : "";
     }
-  }, [form.dob]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm(updatedForm);
   };
 
   const handleSubmit = async (e) => {
@@ -95,8 +74,10 @@ const EditBiodata = () => {
       }
     }
     try {
-      const res = await axios.post("http://localhost:3000/api/biodata", form);
+      const res = await axios.post("http://localhost:3000/biodatas", form);
       toast.success(res.data.message || "Biodata saved successfully!");
+      // Optionally, reset form here if you want
+      // setForm({ ...initialState, contactEmail: user?.email || "" });
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to save biodata.");
     }
@@ -221,7 +202,7 @@ const EditBiodata = () => {
           {/* Contact Email */}
           <div>
             <label className="font-medium text-gray-700">Contact Email*</label>
-            <input name="contactEmail" value={form.contactEmail} readOnly className="w-full mt-1 p-2 rounded-lg border border-gray-200 bg-white/60" />
+            <input name="contactEmail" className="w-full mt-1 p-2 rounded-lg border border-gray-200 bg-white/60" />
           </div>
           {/* Mobile Number */}
           <div>
@@ -231,7 +212,7 @@ const EditBiodata = () => {
         </div>
         <button
           type="submit"
-          className="w-full mt-6 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg transition duration-300"
+          className="w-full mt-6 cursor-pointer bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg transition duration-300"
         >
           Save And Publish Now
         </button>
