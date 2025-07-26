@@ -11,6 +11,7 @@ import EditBiodata from "../Components/EditBiodata";
 import ViewBiodataPage from "../Components/ViewBiodataPage";
 import DBHome from "../Components/DBHome";
 import PrivateRoute from "../Provider/PrivateRoute";
+import ManageUsers from "../Components/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
                         path: "view-biodata",
                         Component: ViewBiodataPage,
                     },
+                    {
+                        path:"manage",
+                        Component:ManageUsers,
+                    }
                 ],
             },
         ],
