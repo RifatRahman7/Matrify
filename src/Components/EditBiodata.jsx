@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from 'sweetalert2';
 
 const divisions = [
   "Dhaka", "Chattagram", "Rangpur", "Barisal", "Khulna", "Mymensingh", "Sylhet",
@@ -61,6 +62,9 @@ const EditBiodata = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = { ...form, contactEmail: user?.email };
+
     // Validation
     for (let key of [
       "biodataType", "name", "profileImage", "dob", "height", "weight", "age",
@@ -68,20 +72,28 @@ const EditBiodata = () => {
       "presentDivision", "expectedPartnerAge", "expectedPartnerHeight",
       "expectedPartnerWeight", "contactEmail", "mobile"
     ]) {
-      if (!form[key]) {
+      if (!formData[key]) {
         toast.error("Please fill all required fields.");
         return;
       }
     }
+
     try {
-      const res = await axios.post("http://localhost:3000/biodatas", form);
-      toast.success(res.data.message || "Biodata saved successfully!");
-      // Optionally, reset form here if you want
-      // setForm({ ...initialState, contactEmail: user?.email || "" });
+      const res = await axios.post("http://localhost:3000/biodatas", formData);
+
+      // SweetAlert2 success popup
+      Swal.fire({
+        title: "Success!",
+        text: res.data.message || "Biodata saved successfully!",
+        icon: "success",
+        confirmButtonColor: "#16a34a",
+      });
+
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to save biodata.");
     }
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh]">
@@ -200,9 +212,15 @@ const EditBiodata = () => {
             </select>
           </div>
           {/* Contact Email */}
+          {/* Contact Email */}
           <div>
             <label className="font-medium text-gray-700">Contact Email*</label>
-            <input name="contactEmail" className="w-full mt-1 p-2 rounded-lg border border-gray-200 bg-white/60" />
+            <input
+              name="contactEmail"
+              value={user?.email || ""}
+              readOnly
+              className="w-full mt-1 p-2 rounded-lg border border-gray-200 bg-white/60"
+            />
           </div>
           {/* Mobile Number */}
           <div>

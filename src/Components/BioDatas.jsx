@@ -1,25 +1,23 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   FaFilter,
   FaUser,
   FaMapMarkerAlt,
   FaBriefcase,
   FaIdBadge,
-} from 'react-icons/fa';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+} from "react-icons/fa";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const divisions = [
-  'Dhaka',
-  'Chattagram',
-  'Rangpur',
-  'Barisal',
-  'Khulna',
-  'Mymensingh',
-  'Sylhet',
+  "Dhaka",
+  "Chattagram",
+  "Rangpur",
+  "Barisal",
+  "Khulna",
+  "Mymensingh",
+  "Sylhet",
 ];
 
 export default function BiodatasPage() {
@@ -27,8 +25,8 @@ export default function BiodatasPage() {
   const [filters, setFilters] = useState({
     minAge: 18,
     maxAge: 40,
-    type: '',
-    division: '',
+    type: "",
+    division: "",
   });
 
   useEffect(() => {
@@ -36,19 +34,16 @@ export default function BiodatasPage() {
     // eslint-disable-next-line
   }, [filters]);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
-  }, []);
-
   const fetchBiodatas = async () => {
-    const { minAge, maxAge, type, division } = filters;
-    const res = await axios.get('http://localhost:3000/biodatas', {
-      params: { minAge, maxAge, type, division },
-    });
-    setBiodatas(res.data);
+    try {
+      const { minAge, maxAge, type, division } = filters;
+      const res = await axios.get("http://localhost:3000/biodatas", {
+        params: { minAge, maxAge, type, division },
+      });
+      setBiodatas(res.data);
+    } catch (error) {
+      console.error("Failed to fetch biodatas", error);
+    }
   };
 
   return (
@@ -137,18 +132,15 @@ export default function BiodatasPage() {
               No biodata found for selected filters.
             </div>
           )}
-          {biodatas.map((biodata, idx) => (
+          {biodatas.map((biodata) => (
             <div
               key={biodata._id}
-              data-aos="fade-up"
-              data-aos-delay={idx * 80}
-              className="bg-white/90 rounded-2xl shadow-lg p-7 text-center border border-gray-100 transition-all duration-200 hover:scale-105 group relative overflow-hidden"
+              className="bg-white/90 rounded-2xl shadow-lg p-7 text-center border border-gray-100 transition-all duration-200 hover:scale-105"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-green-100/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
               <img
                 src={biodata.profileImage}
                 alt="Profile"
-                className="w-28 h-28 rounded-full mx-auto object-cover shadow-lg border-4 border-green-100 group-hover:border-green-300 transition"
+                className="w-28 h-28 rounded-full mx-auto object-cover shadow-lg border-4 border-green-100"
               />
               <h3 className="text-2xl mt-4 font-bold text-gray-800 flex items-center justify-center gap-2">
                 <FaUser className="text-green-500" />

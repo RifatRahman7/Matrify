@@ -23,7 +23,7 @@ const userRoutes = [
     { name: "Edit Biodata", path: "/dashboard/edit-biodata", icon: <Edit className="w-5 h-5 mr-2" /> },
     { name: "View Biodata", path: "/dashboard/view-biodata", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "My Contact Request", path: "/dashboard/contact-request", icon: <Mail className="w-5 h-5 mr-2" /> },
-    { name: "Favourites Biodata", path: "/dashboard/favourites", icon: <Heart className="w-5 h-5 mr-2" /> },
+    { name: "Favourite Biodatas", path: "/dashboard/favourites", icon: <Heart className="w-5 h-5 mr-2" /> },
 ];
 
 const adminRoutes = [

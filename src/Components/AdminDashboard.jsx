@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaUsers, FaMars, FaVenus, FaCrown, FaDollarSign } from "react-icons/fa";
-import { Link, useNavigate, useLocation } from "react-router";
-import { LogOut } from "lucide-react";
 import axios from "axios";
 
 const StatCard = ({ icon, label, value, color }) => (
@@ -13,13 +11,6 @@ const StatCard = ({ icon, label, value, color }) => (
     </div>
   </div>
 );
-
-const adminRoutes = [
-  { name: "Manage Users", path: "/dashboard/admin/manage-users" },
-  { name: "Approved Premium", path: "/dashboard/admin/approved-premium" },
-  { name: "Approved Contact Request", path: "/dashboard/admin/approved-contact-request" },
-];
-
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     total: 0,
@@ -29,8 +20,6 @@ const AdminDashboard = () => {
     revenue: 0,
   });
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const fetchStats = async () => {
