@@ -12,6 +12,7 @@ import ViewBiodataPage from "../Components/ViewBiodataPage";
 import DBHome from "../Components/DBHome";
 import PrivateRoute from "../Provider/PrivateRoute";
 import ManageUsers from "../Components/ManageUsers";
+import AdminRoute from "../Provider/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard",
-                Component: ()=>(
+                Component: () => (
                     <PrivateRoute>
                         <DashboardLayout />
                     </PrivateRoute>
@@ -63,9 +64,13 @@ const router = createBrowserRouter([
                         Component: ViewBiodataPage,
                     },
                     {
-                        path:"manage",
-                        Component:ManageUsers,
-                    }
+                        path: "manage",
+                        element: (
+                            <AdminRoute>
+                                <ManageUsers />
+                            </AdminRoute>
+                        ),
+                    },
                 ],
             },
         ],
