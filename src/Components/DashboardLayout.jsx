@@ -7,19 +7,30 @@ import {
     Heart,
     Mail,
     Menu,
-    X
+    X,
+    Home
 } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+import AdminDashboard from "./AdminDashboard";
+import DashboardHome from "./DBHome";
 
-const routes = [
+const userRoutes = [
+    { name: "Home", path: "/", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Edit Biodata", path: "/dashboard/edit-biodata", icon: <Edit className="w-5 h-5 mr-2" /> },
     { name: "View Biodata", path: "/dashboard/view-biodata", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "My Contact Request", path: "/dashboard/contact-request", icon: <Mail className="w-5 h-5 mr-2" /> },
     { name: "Favourites Biodata", path: "/dashboard/favourites", icon: <Heart className="w-5 h-5 mr-2" /> },
+];
+
+const adminRoutes = [
+    { name: "Home", path: "/", icon: <Home className="w-5 h-5 mr-2" /> },
+    { name: "Manage Users", path: "/dashboard/manage", icon: <User className="w-5 h-5 mr-2" /> },
+    { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <Heart className="w-5 h-5 mr-2" /> },
+    { name: "Approved Contact Request", path: "/dashboard/approvedContactRequest", icon: <Mail className="w-5 h-5 mr-2" /> },
 ];
 
 const DashboardLayout = () => {
@@ -67,6 +78,8 @@ const DashboardLayout = () => {
     const displayName = dbUser?.name || user?.displayName || "User";
     const displayPhoto = dbUser?.photoURL || user?.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png";
     const displayEmail = dbUser?.email || user?.email || "";
+    const isAdmin = dbUser?.role === "admin" || dbUser?.isAdmin;
+    const sidebarRoutes = isAdmin ? adminRoutes : userRoutes;
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 roboto">
@@ -92,7 +105,7 @@ const DashboardLayout = () => {
                         <span className="font-bold text-lg text-gray-800">{displayName}</span>
                         <span className="text-xs text-gray-500">{displayEmail}</span>
                     </div>
-                    {routes.map((route) => (
+                    {sidebarRoutes.map((route) => (
                         <Link
                             key={route.path}
                             to={route.path}
@@ -117,7 +130,11 @@ const DashboardLayout = () => {
                 {/* Mobile Sidebar Drawer */}
                 {isSidebarOpen && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex">
-                        <div className="bg-white w-64 p-6 flex flex-col space-y-4 h-full">
+                        <div className={`
+              bg-white w-64 p-6 flex flex-col space-y-4 h-full
+              transform transition-transform duration-300 ease-in-out
+              ${isSidebarOpen ? "translate-x-0" : "-translate-x-64"}
+            `}>
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-lg font-bold text-gray-800">Dashboard</h3>
                                 <button onClick={() => setIsSidebarOpen(false)} className="p-2 bg-gray-100 rounded-full">
@@ -133,7 +150,7 @@ const DashboardLayout = () => {
                                 <span className="font-bold text-base text-gray-800">{displayName}</span>
                                 <span className="text-xs text-gray-500">{displayEmail}</span>
                             </div>
-                            {routes.map((route) => (
+                            {sidebarRoutes.map((route) => (
                                 <Link
                                     key={route.path}
                                     to={route.path}
@@ -161,10 +178,17 @@ const DashboardLayout = () => {
 
                 {/* Main Content */}
                 <main className="flex-1 bg-white/60 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6 min-h-[400px]">
-                    <Outlet />
+                    {location.pathname === "/dashboard" ? (
+                        isAdmin ? (
+                            <AdminDashboard />
+                        ) : (
+                            <DashboardHome />
+                        )
+                    ) : (
+                        <Outlet />
+                    )}
                 </main>
             </div>
-
             <Footer />
         </div>
     );

@@ -49,6 +49,7 @@ const DashboardHome = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
+      <h1 className="text-4xl pb-3 font-bold">User Dashboard</h1>
       <div className="w-full max-w-2xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 text-center">
         <img
           src={displayPhoto}
