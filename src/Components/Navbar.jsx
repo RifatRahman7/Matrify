@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Menu,
     X,
@@ -13,12 +13,25 @@ import {
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const { user, logOut } = useContext(AuthContext);
+
+    // Fetch user from MongoDB
+    const [dbUser, setDbUser] = useState(null);
+
+    useEffect(() => {
+        if (user?.email) {
+            axios
+                .get(`http://localhost:3000/users/${user.email}`)
+                .then(res => setDbUser(res.data))
+                .catch(() => setDbUser(null));
+        }
+    }, [user?.email]);
 
     // Navigation items except auth
     const navItems = [
@@ -62,9 +75,9 @@ const Navbar = () => {
         if (user) {
             return (
                 <div className="flex items-center space-x-2">
-                    {user.photoURL && (
+                    {(dbUser?.photoURL || user?.photoURL) && (
                         <img
-                            src={user.photoURL}
+                            src={dbUser?.photoURL || user?.photoURL}
                             alt="User"
                             className="w-8 h-8 rounded-full border-2 border-green-400 shadow"
                         />

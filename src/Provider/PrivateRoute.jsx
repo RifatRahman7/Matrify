@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
-import { Navigate, useLocation } from 'react-router';
-import { AuthContext } from './AuthProvider';
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import { Navigate, useLocation } from "react-router";
 
 const PrivateRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const location = useLocation();
 
-    // if (loading) {
-    //     return (
-    //         <Loader></Loader>
-    //     )
-    // }
+    if (loading) {
+        return <div className="text-center roboto text-3xl py-20 text-black font-bold">Loading Dashboard...</div>;
+    }
 
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;

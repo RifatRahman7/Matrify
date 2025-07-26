@@ -10,6 +10,7 @@ import DashboardLayout from "../Components/DashboardLayout";
 import EditBiodata from "../Components/EditBiodata";
 import ViewBiodataPage from "../Components/ViewBiodataPage";
 import DBHome from "../Components/DBHome";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard",
-                Component: DashboardLayout,
+                Component: ()=>(
+                    <PrivateRoute>
+                        <DashboardLayout />
+                    </PrivateRoute>
+                ),
                 children: [
                     {
                         index: true,
