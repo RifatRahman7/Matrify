@@ -1,26 +1,83 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router";
 import {
-  FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaBriefcase, FaIdBadge
+  FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaBriefcase, FaIdBadge, FaHeart
 } from "react-icons/fa";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const BiodataDetailsPage = () => {
   const { biodataId } = useParams();
-  const [biodata, setBiodata] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
+  const [biodata, setBiodata] = useState(null);
+  const [similar, setSimilar] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [dbUser, setDbUser] = useState(null);
+
+  // Fetch logged-in user from MongoDB to check premium
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/users/${user.email}`)
+        .then(res => setDbUser(res.data))
+        .catch(() => setDbUser(null));
+    }
+  }, [user?.email]);
+
+  // Fetch biodata details
   useEffect(() => {
     axios
       .get(`http://localhost:3000/biodatas/${biodataId}`)
       .then((res) => {
         setBiodata(res.data);
         setLoading(false);
+        // Fetch similar biodatas
+        axios
+          .get("http://localhost:3000/biodatas", {
+            params: {
+              type: res.data.biodataType,
+            },
+          })
+          .then((simRes) => {
+            // Exclude current biodata and limit to 3
+            const filtered = simRes.data.filter(
+              (b) => b.biodataId !== res.data.biodataId
+            );
+            setSimilar(filtered.slice(0, 3));
+          });
       })
       .catch(() => setLoading(false));
   }, [biodataId]);
+
+  // Add to Favourites
+  const handleAddToFavourites = async () => {
+    if (!user?.email) {
+      Swal.fire("Login Required", "Please login to add to favourites.", "info");
+      return;
+    }
+    try {
+      await axios.post("http://localhost:3000/favourites", {
+        userEmail: user.email,
+        biodataId: biodata.biodataId,
+      });
+      Swal.fire("Added!", "Biodata added to your favourites.", "success");
+    } catch {
+      Swal.fire("Error", "Failed to add to favourites.", "error");
+    }
+  };
+
+  // Request Contact Info
+  const handleRequestContact = () => {
+    navigate(`/checkout/${biodata.biodataId}`);
+  };
+
+  // Check if user is premium
+  const isPremium = dbUser?.isPremium || dbUser?.role === "admin";
 
   if (loading) {
     return <div className="text-center text-lg text-gray-500">Loading...</div>;
@@ -114,19 +171,77 @@ const BiodataDetailsPage = () => {
                 <span className="font-semibold">Expected Partner Weight:</span>
                 <span>{biodata.expectedPartnerWeight}</span>
               </div>
-              <div className="mb-2 flex items-center gap-2">
-                <FaEnvelope className="text-blue-600" />
-                <span className="font-semibold">Contact Email:</span>
-                <span>{biodata.contactEmail}</span>
-              </div>
-              <div className="mb-2 flex items-center gap-2">
-                <FaPhoneAlt className="text-green-600" />
-                <span className="font-semibold">Mobile:</span>
-                <span>{biodata.mobile}</span>
-              </div>
+              {/* Contact info: only for premium users */}
+              {isPremium ? (
+                <>
+                  <div className="mb-2 flex items-center gap-2">
+                    <FaEnvelope className="text-blue-600" />
+                    <span className="font-semibold">Contact Email:</span>
+                    <span>{biodata.contactEmail}</span>
+                  </div>
+                  <div className="mb-2 flex items-center gap-2">
+                    <FaPhoneAlt className="text-green-600" />
+                    <span className="font-semibold">Mobile:</span>
+                    <span>{biodata.mobile}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="mb-2 flex flex-col gap-2">
+                  <span className="text-sm text-gray-500 italic">
+                    Contact information is only visible to premium members.
+                  </span>
+                </div>
+              )}
             </div>
           </div>
+          {/* Action buttons */}
+          <div className="flex flex-wrap gap-4 justify-center mt-8">
+            <button
+              onClick={handleAddToFavourites}
+              className="flex items-center gap-2 bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg transition duration-200 cursor-pointer"
+            >
+              <FaHeart /> Add to Favourites
+            </button>
+            {!isPremium && (
+              <button
+                onClick={handleRequestContact}
+                className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg transition duration-200 cursor-pointer"
+              >
+                Request Contact Information
+              </button>
+            )}
+          </div>
         </div>
+
+        {/* Similar Biodatas */}
+        {similar.length > 0 && (
+          <div className="w-full max-w-2xl mt-10">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Similar Biodatas</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {similar.map((sim) => (
+                <div
+                  key={sim._id}
+                  className="bg-white/70 backdrop-blur-lg rounded-xl shadow p-4 flex flex-col items-center"
+                >
+                  <img
+                    src={sim.profileImage}
+                    alt="Profile"
+                    className="w-20 h-20 rounded-full object-cover border-2 border-green-200 shadow mb-2"
+                  />
+                  <div className="font-bold text-gray-800">{sim.name}</div>
+                  <div className="text-sm text-gray-600">{sim.occupation}</div>
+                  <div className="text-sm text-gray-500">{sim.permanentDivision}</div>
+                  <button
+                    onClick={() => navigate(`/biodatas/${sim.biodataId}`)}
+                    className="mt-3 text-sm bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-1 rounded-full shadow hover:from-green-600 hover:to-blue-600 transition"
+                  >
+                    View Profile
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <Footer />
     </div>

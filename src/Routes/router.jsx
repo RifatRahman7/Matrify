@@ -14,74 +14,63 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import ManageUsers from "../Components/ManageUsers";
 import AdminRoute from "../Provider/AdminRoute";
 import BiodataDetailsPage from "../Components/BiodataDetails";
+import CheckoutPage from "../Components/CheckoutPage";
+import MyFavourites from "../Components/MyFavourites";
+import MyContactRequest from "../Components/MyContactRequest";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        Component: Root,
+  {
+    path: "/",
+    Component: Root,
+    children: [
+      { index: true, Component: Home },
+      { path: "/login", Component: Login },
+      { path: "/register", Component: Register },
+      { path: "/biodatas", Component: BiodatasPage },
+      { path: "/about-us", Component: AboutUs },
+      { path: "/contact-us", Component: ContactUs },
+      {
+        path: "/biodatas/:biodataId",
+        Component: () => (
+          <PrivateRoute>
+            <BiodataDetailsPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkout/:biodataId",
+        Component: () => (
+          <PrivateRoute>
+            <CheckoutPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard",
+        Component: () => (
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        ),
         children: [
-            {
-                index: true,
-                Component: Home,
-            },
-            {
-                path: "/login",
-                Component: Login,
-            },
-            {
-                path: "/register",
-                Component: Register,
-            },
-            {
-                path: "/biodatas",
-                Component: BiodatasPage,
-            },
-            {
-                path: "/about-us",
-                Component: AboutUs,
-            },
-            {
-                path: "/contact-us",
-                Component: ContactUs,
-            },
-            {
-                path: "/biodatas/:biodataId",
-                Component: BiodataDetailsPage
-
-            },
-            {
-                path: "/dashboard",
-                Component: () => (
-                    <PrivateRoute>
-                        <DashboardLayout />
-                    </PrivateRoute>
-                ),
-                children: [
-                    {
-                        index: true,
-                        Component: DBHome,
-                    },
-                    {
-                        path: "edit-biodata",
-                        Component: EditBiodata,
-                    },
-                    {
-                        path: "view-biodata",
-                        Component: ViewBiodataPage,
-                    },
-                    {
-                        path: "manage",
-                        element: (
-                            <AdminRoute>
-                                <ManageUsers />
-                            </AdminRoute>
-                        ),
-                    },
-
-                ],
-            },
+          { index: true, Component: DBHome },
+          { path: "edit-biodata", Component: EditBiodata },
+          { path: "view-biodata", Component: ViewBiodataPage },
+          { path: "contact-request", Component: MyContactRequest },
+          { path: "favourites", Component: MyFavourites },
+          {
+            path: "manage",
+            element: (
+              <AdminRoute>
+                <ManageUsers />
+              </AdminRoute>
+            ),
+          },
+          // Add more dashboard children here as needed
         ],
-    },
+      },
+    ],
+  },
 ]);
 
 export default router;
