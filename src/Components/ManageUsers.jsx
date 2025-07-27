@@ -81,7 +81,7 @@ const ManageUsers = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] roboto">
             <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Manage Users</h2>
                 {loading ? (

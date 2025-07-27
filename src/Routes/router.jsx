@@ -13,6 +13,7 @@ import DBHome from "../Components/DBHome";
 import PrivateRoute from "../Provider/PrivateRoute";
 import ManageUsers from "../Components/ManageUsers";
 import AdminRoute from "../Provider/AdminRoute";
+import BiodataDetailsPage from "../Components/BiodataDetails";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
                 Component: ContactUs,
             },
             {
+                path: "/biodatas/:biodataId",
+                Component: BiodataDetailsPage
+
+            },
+            {
                 path: "/dashboard",
                 Component: () => (
                     <PrivateRoute>
@@ -71,6 +77,7 @@ const router = createBrowserRouter([
                             </AdminRoute>
                         ),
                     },
+
                 ],
             },
         ],
