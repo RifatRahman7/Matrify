@@ -18,28 +18,38 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const createUser = (email, password) => {
+    const createUser = async (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const idToken = await result.user.getIdToken();
+        localStorage.setItem("access-token", idToken);
+        return result;
     };
 
-    const signIn = (email, password) => {
+    const signIn = async (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        const idToken = await result.user.getIdToken();
+        localStorage.setItem("access-token", idToken);
+        return result;
     };
 
     const updateUser = (updatedData) => {
         return updateProfile(auth.currentUser, updatedData);
     };
 
-    const logOut = () => {
-        return signOut(auth);
+    const logOut = async () => {
+        await signOut(auth);
+        localStorage.removeItem("access-token");
     };
 
-    const googleSignIn = () => {
+    const googleSignIn = async () => {
         setLoading(true);
         const googleProvider = new GoogleAuthProvider();
-        return signInWithPopup(auth, googleProvider);
+        const result = await signInWithPopup(auth, googleProvider);
+        const idToken = await result.user.getIdToken();
+        localStorage.setItem("access-token", idToken);
+        return result;
     };
 
     useEffect(() => {
@@ -51,9 +61,7 @@ const AuthProvider = ({ children }) => {
             unsubscribe();
         };
     }, []);
-    // if (loading)
-    //     return (
-    //         <Loader></Loader>)
+
     const authData = {
         user,
         setUser,
