@@ -11,6 +11,7 @@ const ApprovedPremium = () => {
             .then(res => setRequests(res.data))
             .finally(() => setLoading(false));
     }, []);
+
     const handleApprove = async (biodataId) => {
         const result = await Swal.fire({
             title: "Approve Premium?",
@@ -37,33 +38,57 @@ const ApprovedPremium = () => {
                 ) : requests.length === 0 ? (
                     <div className="text-center text-gray-500 py-8">No premium requests found.</div>
                 ) : (
-                    <table className="min-w-full divide-y divide-gray-200 text-sm">
-                        <thead>
-                            <tr className="bg-gradient-to-r from-green-100 to-blue-100">
-                                <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
-                                <th className="px-4 py-2 text-left font-semibold text-gray-700">Email</th>
-                                <th className="px-4 py-2 text-center font-semibold text-gray-700">Biodata Id</th>
-                                <th className="px-4 py-2 text-center font-semibold text-gray-700">Make Premium</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <>
+                        {/* Table for md and up */}
+                        <div className="overflow-x-auto hidden md:block">
+                            <table className="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead>
+                                    <tr className="bg-gradient-to-r from-green-100 to-blue-100">
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Email</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Biodata Id</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Make Premium</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {requests.map(r => (
+                                        <tr key={r.biodataId} className="hover:bg-blue-50 transition">
+                                            <td className="px-4 py-2">{r.name}</td>
+                                            <td className="px-4 py-2">{r.contactEmail}</td>
+                                            <td className="px-4 py-2 text-center">{r.biodataId}</td>
+                                            <td className="px-4 py-2 text-center">
+                                                <button
+                                                    onClick={() => handleApprove(r.biodataId)}
+                                                    className="px-3 py-1 cursor-pointer rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition"
+                                                >
+                                                    Make Premium
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        {/* Card system for small devices */}
+                        <div className="block md:hidden space-y-4 divide-y divide-gray-200">
                             {requests.map(r => (
-                                <tr key={r.biodataId} className="hover:bg-blue-50 transition">
-                                    <td className="px-4 py-2">{r.name}</td>
-                                    <td className="px-4 py-2">{r.contactEmail}</td>
-                                    <td className="px-4 py-2 text-center">{r.biodataId}</td>
-                                    <td className="px-4 py-2 text-center">
-                                        <button
-                                            onClick={() => handleApprove(r.biodataId)}
-                                            className="px-3 py-1 cursor-pointer rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition"
-                                        >
-                                            Make Premium
-                                        </button>
-                                    </td>
-                                </tr>
+                                <div
+                                    key={r.biodataId}
+                                    className="bg-white/90 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100"
+                                >
+                                    <div className="font-bold text-gray-800 text-lg">{r.name}</div>
+                                    <div className="text-sm text-gray-600 mb-1">{r.contactEmail}</div>
+                                    <div className="text-sm text-gray-500 mb-2">Biodata ID: {r.biodataId}</div>
+                                    <button
+                                        onClick={() => handleApprove(r.biodataId)}
+                                        className="px-3 py-2 cursor-pointer rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition"
+                                    >
+                                        Make Premium
+                                    </button>
+                                </div>
                             ))}
-                        </tbody>
-                    </table>
+                        </div>
+                    </>
                 )}
             </div>
         </div>

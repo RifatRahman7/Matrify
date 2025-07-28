@@ -191,20 +191,20 @@ const ManageUsers = () => {
                             )}
                         </div>
                         {/* Card system for small devices */}
-                        <div className="block md:hidden space-y-4">
+                        <div className="block md:hidden space-y-4 divide-y divide-gray-200">
                             {users.length === 0 && (
                                 <div className="text-center text-gray-500 py-8">Search to find users...</div>
                             )}
                             {users.map((u) => (
                                 <div
                                     key={u.email}
-                                    className="bg-white/90 rounded-xl shadow p-4 flex flex-col gap-2 border border-gray-100"
+                                    className="bg-white/90 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100"
                                 >
                                     <div className="flex items-center gap-3 mb-2">
                                         <img
                                             src={u.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png"}
                                             alt={u.name}
-                                            className="w-10 h-10 rounded-full border-2 border-green-200 shadow"
+                                            className="w-12 h-12 rounded-full border-2 border-green-200 shadow"
                                         />
                                         <div>
                                             <div className="font-semibold text-gray-800">{u.name}</div>
