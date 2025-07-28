@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaBriefcase, FaIdBadge } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
-// import Swal from "sweetalert2"; // Uncomment if you want to use SweetAlert2 for premium
+import Swal from "sweetalert2";
 
 const ViewBiodata = () => {
   const { user } = useContext(AuthContext);
   const [Biodata, setBiodata] = useState(null);
   const [loading, setLoading] = useState(true);
+
   // Fetch user's biodata
   useEffect(() => {
     if (user?.email) {
@@ -19,37 +20,39 @@ const ViewBiodata = () => {
         .catch(() => setLoading(false));
     }
   }, [user?.email]);
-  // // Handle Make Premium (Uncomment to enable)
-  // const handleMakePremium = async () => {
-  //   const result = await Swal.fire({
-  //     title: "Make Biodata Premium?",
-  //     text: "Are you sure you want to send your biodata for premium approval?",
-  //     icon: "question",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#16a34a",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, send for approval",
-  //   });
-  //   if (result.isConfirmed) {
-  //     try {
-  //       await axios.post("http://localhost:3000/api/biodata/premium-request", {
-  //         contactEmail: user.email,
-  //       });
-  //       Swal.fire({
-  //         title: "Request Sent!",
-  //         text: "Your biodata has been sent for premium approval.",
-  //         icon: "success",
-  //         confirmButtonColor: "#16a34a",
-  //       });
-  //     } catch (err) {
-  //       Swal.fire({
-  //         title: "Error",
-  //         text: "Failed to send request. Please try again.",
-  //         icon: "error",
-  //       });
-  //     }
-  //   }
-  // };
+
+  // Handle Make Premium
+  const handleMakePremium = async () => {
+    const result = await Swal.fire({
+      title: "Make Biodata Premium?",
+      text: "Are you sure you want to send your biodata for premium approval?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, send for approval",
+    });
+    if (result.isConfirmed) {
+      try {
+        await axios.patch(`http://localhost:3000/biodatas/request-premium/${Biodata.biodataId}`);
+        Swal.fire({
+          title: "Request Sent!",
+          text: "Your biodata has been sent for premium approval.",
+          icon: "success",
+          confirmButtonColor: "#16a34a",
+        });
+        // Refetch biodata to update UI
+        const res = await axios.get(`http://localhost:3000/biodatas/email/${user.email}`);
+        setBiodata(res.data);
+      } catch (err) {
+        Swal.fire({
+          title: "Error",
+          text: "Failed to send request. Please try again.",
+          icon: "error",
+        });
+      }
+    }
+  };
 
   if (loading) {
     return <div className="text-center text-lg text-gray-500">Loading...</div>
@@ -153,30 +156,31 @@ const ViewBiodata = () => {
             </div>
           </div>
         </div>
-        {/* 
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={handleMakePremium}
-            className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300"
-          >
-            Make Biodata Premium
-          </button>
-        </div>
-        {biodata.isPremium && (
+        {/* Premium Button and Badges */}
+        {!Biodata.isPremium && !Biodata.premiumRequest && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={handleMakePremium}
+              className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 cursor-pointer text-white font-semibold px-8 py-3 rounded-full shadow-lg transition duration-300"
+            >
+              Make Biodata Premium
+            </button>
+          </div>
+        )}
+        {Biodata.isPremium && (
           <div className="mt-4 text-center">
             <span className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-600 text-white px-4 py-1 rounded-full font-semibold shadow">
               Premium Biodata
             </span>
           </div>
         )}
-        {biodata.premiumRequest && !biodata.isPremium && (
+        {Biodata.premiumRequest && !Biodata.isPremium && (
           <div className="mt-4 text-center">
             <span className="inline-block bg-gradient-to-r from-blue-400 to-blue-600 text-white px-4 py-1 rounded-full font-semibold shadow">
               Premium Request Pending
             </span>
           </div>
         )}
-        */}
       </div>
     </div>
   );

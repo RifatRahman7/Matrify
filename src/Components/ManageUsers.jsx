@@ -11,11 +11,11 @@ const ManageUsers = () => {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
 
-    // Fetch users from backend
+    // Fetch users with their biodata info
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:3000/users")
+            .get("http://localhost:3000/users/with-biodata")
             .then((res) => setUsers(res.data))
             .catch(() => setUsers([]))
             .finally(() => setLoading(false));
@@ -27,13 +27,13 @@ const ManageUsers = () => {
         setLoading(true);
         if (search.trim() === "") {
             axios
-                .get("http://localhost:3000/users")
+                .get("http://localhost:3000/users/with-biodata")
                 .then((res) => setUsers(res.data))
                 .catch(() => setUsers([]))
                 .finally(() => setLoading(false));
         } else {
             axios
-                .get(`http://localhost:3000/users/search/${search}`)
+                .get(`http://localhost:3000/users/search-with-biodata/${search}`)
                 .then((res) => setUsers(res.data))
                 .catch(() => setUsers([]))
                 .finally(() => setLoading(false));
@@ -170,32 +170,30 @@ const ManageUsers = () => {
                                                     <span className="inline-flex items-center gap-1 text-yellow-600 font-semibold">
                                                         <FaCrown /> Premium
                                                     </span>
-                                                ) : (
+                                                ) : u.biodata?.premiumRequest ? (
                                                     <button
                                                         onClick={() => handleMakePremium(u.email)}
                                                         className="px-3 py-1 cursor-pointer rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition"
-                                                        disabled={u.isPremium}
                                                     >
                                                         <LuCrown className="inline-block mr-1" />
                                                         Make Premium
                                                     </button>
+                                                ) : (
+                                                    <span className="text-gray-400">-</span>
                                                 )}
-                                            </td>
-                                            <td className="px-4 py-2 text-center">
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                             {users.length === 0 && (
-                                <div className="text-center text-gray-500 py-8">No users found.</div>
+                                <div className="text-center text-gray-500 py-8">Search to find users...</div>
                             )}
                         </div>
-
                         {/* Card system for small devices */}
                         <div className="block md:hidden space-y-4">
                             {users.length === 0 && (
-                                <div className="text-center text-gray-500 py-8">No users found.</div>
+                                <div className="text-center text-gray-500 py-8">Search to find users...</div>
                             )}
                             {users.map((u) => (
                                 <div
@@ -236,14 +234,15 @@ const ManageUsers = () => {
                                                 <span className="inline-flex items-center gap-1 text-yellow-600 font-semibold">
                                                     <FaCrown /> Premium
                                                 </span>
-                                            ) : (
+                                            ) : u.biodata?.premiumRequest ? (
                                                 <button
                                                     onClick={() => handleMakePremium(u.email)}
                                                     className="px-3 py-1 cursor-pointer rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold hover:from-yellow-500 hover:to-yellow-700 transition text-xs"
-                                                    disabled={u.isPremium}
                                                 >
                                                     Make Premium
                                                 </button>
+                                            ) : (
+                                                <span className="text-gray-400">-</span>
                                             )}
                                         </div>
                                     </div>

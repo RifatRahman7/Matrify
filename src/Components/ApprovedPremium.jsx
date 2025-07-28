@@ -11,7 +11,6 @@ const ApprovedPremium = () => {
             .then(res => setRequests(res.data))
             .finally(() => setLoading(false));
     }, []);
-      console.log(requests);
     const handleApprove = async (biodataId) => {
         const result = await Swal.fire({
             title: "Approve Premium?",
