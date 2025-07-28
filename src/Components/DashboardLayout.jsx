@@ -18,7 +18,7 @@ import axios from "axios";
 import AdminDashboard from "./AdminDashboard";
 import DashboardHome from "./DBHome";
 import { FcApprove } from "react-icons/fc";
-
+import { FaDiagramSuccessor } from "react-icons/fa6";
 const userRoutes = [
     { name: "Dashboard Home", path: "/dashboard/user-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Edit Biodata", path: "/dashboard/edit-biodata", icon: <Edit className="w-5 h-5 mr-2" /> },
@@ -33,6 +33,7 @@ const adminRoutes = [
     { name: "Manage Users", path: "/dashboard/manage", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <FcApprove className="text-black w-5 h-5 mr-2" /> },
     { name: "Approved Contact Request", path: "/dashboard/approvedContactRequest", icon: <Mail className="w-5 h-5 mr-2" /> },
+     { name: "Success Story", path: "/dashboard/success-story", icon: <FaDiagramSuccessor className="w-5 h-5 mr-2" /> },
 ];
 
 const DashboardLayout = () => {

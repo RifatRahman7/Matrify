@@ -21,6 +21,7 @@ import ApprovedPremium from "../Components/ApprovedPremium";
 import ApprovedContactRequest from "../Components/ApprovedContactRequest";
 import AdminDashboard from "../Components/AdminDashboard";
 import GotMarried from "../Components/GotMarried";
+import SuccessAdmin from "../Components/SuccessAdmin";
 
 const router = createBrowserRouter([
     {
@@ -92,6 +93,14 @@ const router = createBrowserRouter([
                        element: (
                             <AdminRoute>
                                <AdminDashboard />
+                            </AdminRoute>
+                        ),
+                    },
+                     {
+                       path: "success-story",
+                       element: (
+                            <AdminRoute>
+                            <SuccessAdmin />
                             </AdminRoute>
                         ),
                     },

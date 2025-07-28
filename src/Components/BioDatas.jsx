@@ -178,4 +178,4 @@ export default function BiodatasPage() {
       <Footer />
     </div>
   );
-}
+};

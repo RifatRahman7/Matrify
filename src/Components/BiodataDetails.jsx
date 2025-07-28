@@ -80,7 +80,7 @@ const BiodataDetailsPage = () => {
   const isPremium = dbUser?.isPremium || dbUser?.role === "admin";
 
   if (loading) {
-    return <div className="text-center text-lg text-gray-500">Loading...</div>;
+    return <div className="text-center text-xl text-gray-600">Loading Biodata Details...</div>;
   }
 
   if (!biodata) {

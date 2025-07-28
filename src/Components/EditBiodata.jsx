@@ -81,7 +81,6 @@ const EditBiodata = () => {
     try {
       const res = await axios.post("http://localhost:3000/biodatas", formData);
 
-      // SweetAlert2 success popup
       Swal.fire({
         title: "Success!",
         text: res.data.message || "Biodata saved successfully!",
@@ -211,7 +210,6 @@ const EditBiodata = () => {
               {weights.map(w => <option key={w} value={w}>{w}</option>)}
             </select>
           </div>
-          {/* Contact Email */}
           {/* Contact Email */}
           <div>
             <label className="font-medium text-gray-700">Contact Email*</label>

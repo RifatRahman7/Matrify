@@ -33,7 +33,6 @@ const Navbar = () => {
         }
     }, [user?.email]);
 
-    // Navigation items except auth
     const navItems = [
         { name: 'Home', path: '/', icon: <Home className="w-4 h-4 mr-1" /> },
         { name: 'Biodatas', path: '/biodatas', icon: <Users className="w-4 h-4 mr-1" /> },
@@ -42,10 +41,8 @@ const Navbar = () => {
         { name: 'Contact Us', path: '/contact-us', icon: <Phone className="w-4 h-4 mr-1" /> },
     ];
 
-    // Improved isActive for login/register
     const isActive = (path) => location.pathname === path;
 
-    // SweetAlert2 logout
     const handleLogout = async () => {
         const result = await Swal.fire({
             title: 'Are you sure?',
@@ -70,7 +67,6 @@ const Navbar = () => {
         }
     };
 
-    // Auth buttons logic
     const renderAuthButtons = () => {
         if (user) {
             return (
@@ -125,7 +121,6 @@ const Navbar = () => {
         }
     };
 
-    // For mobile, show only Register if on /login, only Login if on /register
     const renderMobileAuthButtons = () => {
         if (user) {
             return renderAuthButtons();

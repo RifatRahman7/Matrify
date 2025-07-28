@@ -40,7 +40,6 @@ const ManageUsers = () => {
         }
     };
 
-    // Make Admin with SweetAlert2 confirmation
     const handleMakeAdmin = async (email) => {
         const result = await Swal.fire({
             title: "Are you sure?",
@@ -71,7 +70,6 @@ const ManageUsers = () => {
         }
     };
 
-    // Make Premium with SweetAlert2 confirmation
     const handleMakePremium = async (email) => {
         const result = await Swal.fire({
             title: "Are you sure?",
@@ -117,7 +115,7 @@ const ManageUsers = () => {
                     />
                     <button
                         type="submit"
-                        className="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600"
+                        className="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600 cursor-pointer"
                     >
                         <FaSearch />
                     </button>

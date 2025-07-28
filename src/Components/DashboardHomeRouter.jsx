@@ -40,7 +40,6 @@ const DashboardHomeRouter = () => {
     );
   }
 
-  // Show admin dashboard if role is admin, else user dashboard
   if (dbUser.role === "admin") {
     return <AdminDashboard />;
   } else {

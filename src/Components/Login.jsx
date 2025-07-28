@@ -79,7 +79,6 @@ const Login = () => {
       {/* Login Form Section */}
       <div className="flex-grow flex items-center justify-center px-4 mt-10 mb-10">
         <div className="flex flex-col lg:flex-row items-center gap-10">
-          {/* Illustration */}
           <div className="lg:block w-full max-w-md hidden lg:flex">
             <img
               className="rounded-2xl shadow-2xl object-cover w-full h-[420px] border border-white/40"

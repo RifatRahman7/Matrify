@@ -69,7 +69,6 @@ const HowItWorks = () => {
               bg-white/40 backdrop-blur-md border border-white/30 shadow-xl 
               hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
           >
-            {/* Gradient highlight on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none" />
 
             <div className="relative z-10 p-8 text-center flex flex-col items-center">

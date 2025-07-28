@@ -14,19 +14,17 @@ const CheckoutForm = ({ biodataId, userEmail }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [processing, setProcessing] = useState(false);
-    const navigate = useNavigate(); // <-- useNavigate hook
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setProcessing(true);
 
         try {
-            // 1. Create PaymentIntent on backend
             const { data: clientSecret } = await axios.post("http://localhost:3000/create-payment-intent", {
-                amount: 500, // $5.00 in cents
+                amount: 500,
             });
 
-            // 2. Confirm card payment
             const card = elements.getElement(CardElement);
             const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: { card },
@@ -38,14 +36,12 @@ const CheckoutForm = ({ biodataId, userEmail }) => {
                 return;
             }
 
-            // 3. Create contact request in backend
             await axios.post("http://localhost:3000/contact-requests", {
                 biodataId: Number(biodataId),
                 userEmail,
                 status: "pending",
             });
 
-            // 4. Show SweetAlert2 with a button to go to dashboard
             Swal.fire({
                 title: "Success!",
                 text: "Contact request sent for admin approval.",

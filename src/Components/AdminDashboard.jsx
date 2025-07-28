@@ -19,7 +19,6 @@ const renderCustomizedLabel = ({
   cx, cy, midAngle, innerRadius, outerRadius, percent, index, name
 }) => {
   const RADIAN = Math.PI / 180;
-  // Position label outside the arc
   const radius = innerRadius + (outerRadius - innerRadius) * 1.15;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -97,7 +96,6 @@ const AdminDashboard = () => {
             <StatCard icon={<FaVenus />} label="Female Biodatas" value={stats.female} color="text-pink-500" />
             <StatCard icon={<FaDollarSign />} label="Total Revenue (USD)" value={stats.revenue} color="text-green-700" />
           </div>
-          {/* Modern Donut Pie Chart */}
           <div className="flex-1 w-full max-w-xs md:max-w-sm mx-auto">
             <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">Biodata Distribution</h3>
             <div className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 p-4">
