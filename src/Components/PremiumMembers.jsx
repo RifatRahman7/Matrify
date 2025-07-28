@@ -4,8 +4,10 @@ import { FaUser, FaMapMarkerAlt, FaBriefcase, FaIdBadge } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+
 const PremiumMembers = () => {
     const [premiumBiodatas, setPremiumBiodatas] = useState([]);
+    const [sortOrder, setSortOrder] = useState("asc");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,6 +17,15 @@ const PremiumMembers = () => {
                 setPremiumBiodatas(res.data.slice(-6).reverse());
             });
     }, []);
+
+    // Sort biodatas by age
+    const sortedBiodatas = [...premiumBiodatas].sort((a, b) => {
+        if (sortOrder === "asc") {
+            return a.age - b.age;
+        } else {
+            return b.age - a.age;
+        }
+    });
 
     return (
         <div className="max-w-6xl mx-auto py-10 roboto">
@@ -32,8 +43,20 @@ const PremiumMembers = () => {
             <h2 className="text-lg md:text-xl text-center text-gray-700 mb-8">
                 Meet our exclusive premium members who have enhanced profiles for better visibility and connections.
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                {premiumBiodatas.map((biodata, idx) => (
+            {/* Sort Dropdown */}
+            <div className="flex justify-center mb-6">
+                <label className="mr-2 font-semibold text-gray-700">Sort by Age:</label>
+                <select
+                    value={sortOrder}
+                    onChange={e => setSortOrder(e.target.value)}
+                    className="px-3 roboto py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 transition"
+                >
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-10">
+                {sortedBiodatas.map((biodata, idx) => (
                     <motion.div
                         key={biodata.biodataId}
                         initial={{ opacity: 0, y: 60 }}

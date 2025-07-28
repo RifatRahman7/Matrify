@@ -17,6 +17,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import AdminDashboard from "./AdminDashboard";
 import DashboardHome from "./DBHome";
+import { FcApprove } from "react-icons/fc";
 
 const userRoutes = [
     { name: "Dashboard Home", path: "/dashboard/user-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
@@ -24,12 +25,13 @@ const userRoutes = [
     { name: "View Biodata", path: "/dashboard/view-biodata", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "My Contact Request", path: "/dashboard/contact-request", icon: <Mail className="w-5 h-5 mr-2" /> },
     { name: "Favourite Biodatas", path: "/dashboard/favourites", icon: <Heart className="w-5 h-5 mr-2" /> },
+    { name: "Got Married", path: "/dashboard/got-married", icon: <Heart className="w-5 h-5 mr-2" /> },
 ];
 
 const adminRoutes = [
     { name: "Dashboard Home", path: "/dashboard/admin-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Manage Users", path: "/dashboard/manage", icon: <User className="w-5 h-5 mr-2" /> },
-    { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <Heart className="w-5 h-5 mr-2" /> },
+    { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <FcApprove className="text-black w-5 h-5 mr-2" /> },
     { name: "Approved Contact Request", path: "/dashboard/approvedContactRequest", icon: <Mail className="w-5 h-5 mr-2" /> },
 ];
 

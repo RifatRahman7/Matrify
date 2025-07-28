@@ -20,6 +20,7 @@ import MyContactRequest from "../Components/MyContactRequest";
 import ApprovedPremium from "../Components/ApprovedPremium";
 import ApprovedContactRequest from "../Components/ApprovedContactRequest";
 import AdminDashboard from "../Components/AdminDashboard";
+import GotMarried from "../Components/GotMarried";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
                     { path: "view-biodata", Component: ViewBiodataPage },
                     { path: "contact-request", Component: MyContactRequest },
                     { path: "favourites", Component: MyFavourites },
+                    { path: "got-married", Component:GotMarried},
                     {
                         path: "manage",
                         element: (
