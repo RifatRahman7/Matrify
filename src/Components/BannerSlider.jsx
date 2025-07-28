@@ -45,7 +45,6 @@ const BannerSlider = () => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative w-full h-full flex items-center justify-center">
-              {/* Blurred background image */}
               <div
                 className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
                 style={{
@@ -53,9 +52,7 @@ const BannerSlider = () => {
                   filter: "blur(6px) brightness(0.7)",
                 }}
               />
-              {/* Overlay gradient for extra readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10" />
-              {/* Glassmorphism text box */}
               <div className="relative z-20 max-w-3xl mx-auto px-8 py-10 rounded-2xl bg-white/30 backdrop-blur-md shadow-2xl border border-white/30 text-center">
                 <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight">
                   <Typewriter
@@ -85,7 +82,6 @@ const BannerSlider = () => {
         ))}
       </Swiper>
 
-      {/* Custom Swiper pagination styles */}
       <style jsx global>{`
         .custom-bullet {
           width: 14px;

@@ -1,3 +1,5 @@
+import { Typewriter } from "react-simple-typewriter";
+
 const steps = [
   {
     title: "1. Create Your Profile",
@@ -41,12 +43,22 @@ const HowItWorks = () => {
   return (
     <section className="bg-gradient-to-br from-green-50 via-white to-blue-50 py-20 px-4 md:px-8 roboto">
       <div className="max-w-6xl mx-auto text-center mb-16">
-        <h2 className="text-3xl md:text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">
-          How Matrify Works
-        </h2>
-        <p className="text-gray-600 text-lg md:text-xl">
-          A step-by-step guide to finding your perfect match on our platform.
-        </p>
+        <div className="inline-block w-full max-w-2xl bg-green-100/30 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 px-6 py-8 mx-auto">
+          <h2 className="text-3xl md:text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">
+            <Typewriter
+              words={['How Matrify Works']}
+              loop={0}
+              cursor
+              cursorStyle="_"
+              typeSpeed={80}
+              deleteSpeed={50}
+              delaySpeed={1500}
+            />
+          </h2>
+          <p className="text-gray-600 text-lg md:text-xl">
+            A step-by-step guide to finding your perfect match on our platform.
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">

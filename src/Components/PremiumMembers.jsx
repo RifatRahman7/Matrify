@@ -29,20 +29,26 @@ const PremiumMembers = () => {
 
     return (
         <div className="max-w-6xl mx-auto py-10 roboto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
-                <Typewriter
-                    words={['Premium Members']}
-                    loop={0}
-                    cursor
-                    cursorStyle="_"
-                    typeSpeed={80}
-                    deleteSpeed={50}
-                    delaySpeed={1500}
-                />
-            </h2>
-            <h2 className="text-lg md:text-xl text-center text-gray-700 mb-8">
-                Meet our exclusive premium members who have enhanced profiles for better visibility and connections.
-            </h2>
+            <div
+                className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-200/40 via-white/60 to-green-200/40 blur-xl rounded-3xl"
+                style={{ filter: "blur(32px)" }}
+            ></div>
+            <div className="mx-auto max-w-2xl bg-green-100/30 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 px-6 py-6 mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-2">
+                    <Typewriter
+                        words={['Premium Members']}
+                        loop={0}
+                        cursor
+                        cursorStyle="_"
+                        typeSpeed={80}
+                        deleteSpeed={50}
+                        delaySpeed={1500}
+                    />
+                </h2>
+                <h2 className="text-lg md:text-xl text-center text-gray-700">
+                    Meet our exclusive premium members who have enhanced profiles for better visibility and connections.
+                </h2>
+            </div>
             {/* Sort Dropdown */}
             <div className="flex justify-center mb-6">
                 <label className="mr-2 font-semibold text-gray-700">Sort by Age:</label>

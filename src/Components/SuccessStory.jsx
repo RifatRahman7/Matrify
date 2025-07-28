@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
+import { Typewriter } from "react-simple-typewriter";
 
 const SuccessStory = () => {
     const [stories, setStories] = useState([]);
@@ -8,7 +9,6 @@ const SuccessStory = () => {
     useEffect(() => {
         axios.get("http://localhost:3000/success-stories")
             .then(res => {
-                // Sort by marriageDate descending (newest first)
                 const sorted = res.data.sort(
                     (a, b) => new Date(b.marriageDate) - new Date(a.marriageDate)
                 );
@@ -17,10 +17,27 @@ const SuccessStory = () => {
     }, []);
 
     return (
-        <div className="w-full max-w-5xl mx-auto py-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
-                Matrify Success Stories
-            </h2>
+        <div className="relative w-full max-w-5xl mx-auto py-12 roboto">
+            <div
+                className="absolute inset-0 -z-10 bg-gradient-to-br from-pink-200/40 via-white/60 to-yellow-200/40 blur-xl rounded-3xl"
+                style={{ filter: "blur(32px)" }}
+            ></div>
+
+            <div className="flex justify-center mb-8">
+                <div className="bg-green-100/30 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 px-6 py-6 inline-block">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 m-0">
+                        <Typewriter
+                            words={['Matrify Success Stories']}
+                            loop={0}
+                            cursor
+                            cursorStyle="_"
+                            typeSpeed={80}
+                            deleteSpeed={50}
+                            delaySpeed={1500}
+                        />
+                    </h2>
+                </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-5">
                 {stories.map((story, idx) => (
                     <div
