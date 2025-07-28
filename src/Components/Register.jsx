@@ -53,8 +53,9 @@ const Register = () => {
           icon: 'success',
           confirmButtonColor: '#16a34a',
           confirmButtonText: 'OK'
+        }).then(() => {
+          navigate('/login');
         });
-        navigate('/login');
       })
       .catch((error) => {
         toast.error(`${error.message} (${error.code})`);

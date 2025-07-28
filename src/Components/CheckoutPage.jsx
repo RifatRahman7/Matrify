@@ -1,49 +1,66 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { AuthContext } from "../Provider/AuthProvider";
 import { FaLock, FaCreditCard } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthProvider";
 
-const stripePromise = loadStripe("pk_test_..."); // Replace with your Stripe publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const CheckoutForm = ({ biodataId, userEmail }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [processing, setProcessing] = useState(false);
+    const navigate = useNavigate(); // <-- useNavigate hook
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setProcessing(true);
 
-        // 1. Create PaymentIntent on backend
-        const { data: clientSecret } = await axios.post("http://localhost:3000/create-payment-intent", {
-            amount: 500, // $5.00 in cents
-        });
+        try {
+            // 1. Create PaymentIntent on backend
+            const { data: clientSecret } = await axios.post("http://localhost:3000/create-payment-intent", {
+                amount: 500, // $5.00 in cents
+            });
 
-        // 2. Confirm card payment
-        const card = elements.getElement(CardElement);
-        const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: { card },
-        });
+            // 2. Confirm card payment
+            const card = elements.getElement(CardElement);
+            const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: { card },
+            });
 
-        if (error) {
-            Swal.fire("Payment Failed", error.message, "error");
+            if (error) {
+                Swal.fire("Payment Failed", error.message, "error");
+                setProcessing(false);
+                return;
+            }
+
+            // 3. Create contact request in backend
+            await axios.post("http://localhost:3000/contact-requests", {
+                biodataId: Number(biodataId),
+                userEmail,
+                status: "pending",
+            });
+
+            // 4. Show SweetAlert2 with a button to go to dashboard
+            Swal.fire({
+                title: "Success!",
+                text: "Contact request sent for admin approval.",
+                icon: "success",
+                confirmButtonText: "Go to Dashboard",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/dashboard");
+                }
+            });
+        } catch (err) {
+            Swal.fire("Error", "Something went wrong. Please try again.", "error");
+        } finally {
             setProcessing(false);
-            return;
         }
-
-        // 3. Create contact request in backend
-        await axios.post("http://localhost:3000/contact-requests", {
-            biodataId: Number(biodataId),
-            userEmail,
-            status: "pending",
-        });
-
-        Swal.fire("Success!", "Contact request sent for admin approval.", "success");
-        setProcessing(false);
     };
 
     return (

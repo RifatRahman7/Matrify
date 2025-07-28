@@ -1,21 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from "./AuthProvider";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [dbUser, setDbUser] = React.useState(null);
+  const [dbUser, setDbUser] = useState(null);
+  const [fetching, setFetching] = useState(false);
   const location = useLocation();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    let isMounted = true;
     if (user?.email) {
+      setFetching(true);
       fetch(`http://localhost:3000/users/${user.email}`)
         .then(res => res.json())
-        .then(data => setDbUser(data));
+        .then(data => {
+          if (isMounted) setDbUser(data);
+        })
+        .catch(() => {
+          if (isMounted) setDbUser(null);
+        })
+        .finally(() => {
+          if (isMounted) setFetching(false);
+        });
     }
+    return () => { isMounted = false; };
   }, [user]);
 
-  if (loading || (user && !dbUser)) {
+  if (loading || fetching || (user && !dbUser)) {
     return <div className="text-center py-20 text-lg text-gray-500">Loading...</div>;
   }
 

@@ -128,8 +128,8 @@ export default function BiodatasPage() {
         {/* Biodata Cards */}
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {biodatas.length === 0 && (
-            <div className="col-span-full text-center text-gray-400 text-lg py-16">
-              No biodata found for selected filters.
+            <div className="col-span-full text-center text-gray-600 text-lg py-16">
+             Loading Biodatas...
             </div>
           )}
           {biodatas.map((biodata) => (

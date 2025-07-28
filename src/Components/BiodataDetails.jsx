@@ -233,7 +233,7 @@ const BiodataDetailsPage = () => {
                   <div className="text-sm text-gray-500">{sim.permanentDivision}</div>
                   <button
                     onClick={() => navigate(`/biodatas/${sim.biodataId}`)}
-                    className="mt-3 text-sm bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-1 rounded-full shadow hover:from-green-600 hover:to-blue-600 transition"
+                    className="mt-3 text-sm bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-1 rounded-full shadow hover:from-green-600 hover:to-blue-600 transition cursor-pointer"
                   >
                     View Profile
                   </button>

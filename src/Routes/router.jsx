@@ -17,60 +17,78 @@ import BiodataDetailsPage from "../Components/BiodataDetails";
 import CheckoutPage from "../Components/CheckoutPage";
 import MyFavourites from "../Components/MyFavourites";
 import MyContactRequest from "../Components/MyContactRequest";
+import ApprovedPremium from "../Components/ApprovedPremium";
+import ApprovedContactRequest from "../Components/ApprovedContactRequest";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    Component: Root,
-    children: [
-      { index: true, Component: Home },
-      { path: "/login", Component: Login },
-      { path: "/register", Component: Register },
-      { path: "/biodatas", Component: BiodatasPage },
-      { path: "/about-us", Component: AboutUs },
-      { path: "/contact-us", Component: ContactUs },
-      {
-        path: "/biodatas/:biodataId",
-        Component: () => (
-          <PrivateRoute>
-            <BiodataDetailsPage />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/checkout/:biodataId",
-        Component: () => (
-          <PrivateRoute>
-            <CheckoutPage />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/dashboard",
-        Component: () => (
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
-        ),
+    {
+        path: "/",
+        Component: Root,
         children: [
-          { index: true, Component: DBHome },
-          { path: "edit-biodata", Component: EditBiodata },
-          { path: "view-biodata", Component: ViewBiodataPage },
-          { path: "contact-request", Component: MyContactRequest },
-          { path: "favourites", Component: MyFavourites },
-          {
-            path: "manage",
-            element: (
-              <AdminRoute>
-                <ManageUsers />
-              </AdminRoute>
-            ),
-          },
-          // Add more dashboard children here as needed
+            { index: true, Component: Home },
+            { path: "/login", Component: Login },
+            { path: "/register", Component: Register },
+            { path: "/biodatas", Component: BiodatasPage },
+            { path: "/about-us", Component: AboutUs },
+            { path: "/contact-us", Component: ContactUs },
+            {
+                path: "/biodatas/:biodataId",
+                Component: () => (
+                    <PrivateRoute>
+                        <BiodataDetailsPage />
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: "/checkout/:biodataId",
+                Component: () => (
+                    <PrivateRoute>
+                        <CheckoutPage />
+                    </PrivateRoute>
+                ),
+            },
+            {
+                path: "/dashboard",
+                Component: () => (
+                    <PrivateRoute>
+                        <DashboardLayout />
+                    </PrivateRoute>
+                ),
+                children: [
+                    { index: true, Component: DBHome },
+                    { path: "edit-biodata", Component: EditBiodata },
+                    { path: "view-biodata", Component: ViewBiodataPage },
+                    { path: "contact-request", Component: MyContactRequest },
+                    { path: "favourites", Component: MyFavourites },
+                    {
+                        path: "manage",
+                        element: (
+                            <AdminRoute>
+                                <ManageUsers />
+                            </AdminRoute>
+                        ),
+                    },
+                    {
+                        path:"approvedPremium",
+                       element: (
+                            <AdminRoute>
+                                <ApprovedPremium />
+                            </AdminRoute>
+                        ),
+                    },
+                     {
+                        path:"approvedContactRequest",
+                       element: (
+                            <AdminRoute>
+                                <ApprovedContactRequest />
+                            </AdminRoute>
+                        ),
+                    },
+
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 ]);
 
 export default router;

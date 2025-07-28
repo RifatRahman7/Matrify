@@ -1,22 +1,44 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaUserShield, FaCrown } from "react-icons/fa";
+import { FaUserShield, FaCrown, FaSearch } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { LuCrown } from "react-icons/lu";
+
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
 
     // Fetch users from backend
     useEffect(() => {
+        setLoading(true);
         axios
             .get("http://localhost:3000/users")
             .then((res) => setUsers(res.data))
             .catch(() => setUsers([]))
             .finally(() => setLoading(false));
     }, []);
+
+    // Search users
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        if (search.trim() === "") {
+            axios
+                .get("http://localhost:3000/users")
+                .then((res) => setUsers(res.data))
+                .catch(() => setUsers([]))
+                .finally(() => setLoading(false));
+        } else {
+            axios
+                .get(`http://localhost:3000/users/search/${search}`)
+                .then((res) => setUsers(res.data))
+                .catch(() => setUsers([]))
+                .finally(() => setLoading(false));
+        }
+    };
 
     // Make Admin with SweetAlert2 confirmation
     const handleMakeAdmin = async (email) => {
@@ -84,6 +106,22 @@ const ManageUsers = () => {
         <div className="flex flex-col items-center justify-center min-h-[60vh] roboto">
             <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Manage Users</h2>
+                {/* Search Bar */}
+                <form onSubmit={handleSearch} className="flex items-center mb-4 max-w-xs mx-auto">
+                    <input
+                        type="text"
+                        placeholder="Search by name"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none"
+                    />
+                    <button
+                        type="submit"
+                        className="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600"
+                    >
+                        <FaSearch />
+                    </button>
+                </form>
                 {loading ? (
                     <div className="text-center text-gray-500">Loading users...</div>
                 ) : (
