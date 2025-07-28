@@ -19,7 +19,7 @@ import AdminDashboard from "./AdminDashboard";
 import DashboardHome from "./DBHome";
 
 const userRoutes = [
-    { name: "Home", path: "/", icon: <Home className="w-5 h-5 mr-2" /> },
+    { name: "Dashboard Home", path: "/dashboard/user-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Edit Biodata", path: "/dashboard/edit-biodata", icon: <Edit className="w-5 h-5 mr-2" /> },
     { name: "View Biodata", path: "/dashboard/view-biodata", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "My Contact Request", path: "/dashboard/contact-request", icon: <Mail className="w-5 h-5 mr-2" /> },
@@ -27,7 +27,7 @@ const userRoutes = [
 ];
 
 const adminRoutes = [
-    { name: "Home", path: "/", icon: <Home className="w-5 h-5 mr-2" /> },
+    { name: "Dashboard Home", path: "/dashboard/admin-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Manage Users", path: "/dashboard/manage", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <Heart className="w-5 h-5 mr-2" /> },
     { name: "Approved Contact Request", path: "/dashboard/approvedContactRequest", icon: <Mail className="w-5 h-5 mr-2" /> },
@@ -74,7 +74,7 @@ const DashboardLayout = () => {
         }
     };
 
-    // Use dbUser for name/photo/email, fallback to Firebase if not loaded
+    // Use dbUser for name/photo/email
     const displayName = dbUser?.name || user?.displayName || "User";
     const displayPhoto = dbUser?.photoURL || user?.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png";
     const displayEmail = dbUser?.email || user?.email || "";

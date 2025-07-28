@@ -19,6 +19,7 @@ import MyFavourites from "../Components/MyFavourites";
 import MyContactRequest from "../Components/MyContactRequest";
 import ApprovedPremium from "../Components/ApprovedPremium";
 import ApprovedContactRequest from "../Components/ApprovedContactRequest";
+import AdminDashboard from "../Components/AdminDashboard";
 
 const router = createBrowserRouter([
     {
@@ -82,6 +83,22 @@ const router = createBrowserRouter([
                             <AdminRoute>
                                 <ApprovedContactRequest />
                             </AdminRoute>
+                        ),
+                    },
+                    {
+                       path: "admin-dashboard",
+                       element: (
+                            <AdminRoute>
+                               <AdminDashboard />
+                            </AdminRoute>
+                        ),
+                    },
+                    {
+                        path: "user-dashboard",
+                        element: (
+                            <PrivateRoute>
+                                <DBHome />
+                            </PrivateRoute>
                         ),
                     },
 

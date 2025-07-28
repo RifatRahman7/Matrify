@@ -11,6 +11,7 @@ const StatCard = ({ icon, label, value, color }) => (
     </div>
   </div>
 );
+
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     total: 0,
@@ -24,19 +25,13 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [total, male, female, premium, revenue] = await Promise.all([
-          axios.get("http://localhost:3000/admin/biodata-count"),
-          axios.get("http://localhost:3000/admin/biodata-count?type=Male"),
-          axios.get("http://localhost:3000/admin/biodata-count?type=Female"),
-          axios.get("http://localhost:3000/admin/premium-count"),
-          axios.get("http://localhost:3000/admin/total-revenue"),
-        ]);
+        const res = await axios.get("http://localhost:3000/admin/stats");
         setStats({
-          total: total.data.count,
-          male: male.data.count,
-          female: female.data.count,
-          premium: premium.data.count,
-          revenue: revenue.data.revenue,
+          total: res.data.totalBiodata,
+          male: res.data.maleBiodata,
+          female: res.data.femaleBiodata,
+          premium: res.data.premiumBiodata,
+          revenue: res.data.totalRevenue,
         });
       } catch (err) {
         // fallback: show 0s
@@ -52,9 +47,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-start roboto justify-center min-h-[60vh] w-full">
-      {/* Sidebar */}
-      
-      {/* Main Content */}
       <div className="flex-1 w-full max-w-4xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Admin Dashboard</h2>
         <div className="text-center text-gray-500 mt-4 mb-4">
@@ -67,7 +59,6 @@ const AdminDashboard = () => {
           <StatCard icon={<FaVenus />} label="Female Biodatas" value={stats.female} color="text-pink-500" />
           <StatCard icon={<FaDollarSign />} label="Total Revenue (USD)" value={stats.revenue} color="text-green-700" />
         </div>
-        
       </div>
     </div>
   );
