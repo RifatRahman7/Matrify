@@ -1,9 +1,10 @@
-// src/hooks/useAxiosSecure.js
 import { useMemo } from "react";
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://matrify-server.vercel.app/"
 });
 
 axiosSecure.interceptors.request.use(
@@ -17,8 +18,6 @@ axiosSecure.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-const useAxiosSecure = () => {
-  return useMemo(() => axiosSecure, []);
-};
+const useAxiosSecure = () => useMemo(() => axiosSecure, []);
 
 export default useAxiosSecure;
