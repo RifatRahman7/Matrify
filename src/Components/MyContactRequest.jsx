@@ -25,14 +25,14 @@ const MyContactRequest = () => {
     useEffect(() => {
         if (user?.email) {
             axios
-                .get(`http://localhost:3000/contact-requests/${user.email}`)
+                .get(`https://matrify-server.vercel.app/contact-requests/${user.email}`)
                 .then(res => setRequests(res.data));
         }
     }, [user?.email]);
 
     // Delete request
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:3000/contact-requests/${id}`);
+        await axios.delete(`https://matrify-server.vercel.app/contact-requests/${id}`);
         setRequests(requests.filter(r => r._id !== id));
     };
 console.log(requests);

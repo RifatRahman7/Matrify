@@ -41,7 +41,7 @@ const Register = () => {
     createUser(email, password)
       .then(async () => {
         // Create user in MongoDB
-        await axios.post("http://localhost:3000/users", {
+        await axios.post("https://matrify-server.vercel.app/users", {
           name,
           email,
           photoURL: photo,
@@ -66,7 +66,7 @@ const Register = () => {
     googleSignIn()
       .then(async (result) => {
         // Add user to MongoDB users collection
-        await axios.post("http://localhost:3000/users", {
+        await axios.post("https://matrify-server.vercel.app/users", {
           name: result.user.displayName,
           email: result.user.email,
           photoURL: result.user.photoURL,

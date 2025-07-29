@@ -7,7 +7,7 @@ const ApprovedContactRequest = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/admin/contact-requests")
+        axios.get("https://matrify-server.vercel.app/admin/contact-requests")
             .then(res => setRequests(res.data))
             .finally(() => setLoading(false));
     }, []);
@@ -23,7 +23,7 @@ const ApprovedContactRequest = () => {
             confirmButtonText: "Yes, approve"
         });
         if (result.isConfirmed) {
-            await axios.patch(`http://localhost:3000/admin/contact-requests/approve/${id}`);
+            await axios.patch(`https://matrify-server.vercel.app/admin/contact-requests/approve/${id}`);
             setRequests(prev => prev.filter(r => r._id !== id));
             Swal.fire("Success!", "Contact request approved.", "success");
         }

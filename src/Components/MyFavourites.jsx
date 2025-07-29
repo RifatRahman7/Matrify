@@ -10,14 +10,14 @@ const MyFavourites = () => {
     useEffect(() => {
         if (user?.email) {
             axios
-                .get(`http://localhost:3000/favourites/${user.email}`)
+                .get(`https://matrify-server.vercel.app/favourites/${user.email}`)
                 .then(res => setFavs(res.data));
         }
     }, [user?.email]);
 
     // Delete favourite
     const handleDelete = async (biodataId) => {
-        await axios.delete(`http://localhost:3000/favourites/${user.email}/${biodataId}`);
+        await axios.delete(`https://matrify-server.vercel.app/favourites/${user.email}/${biodataId}`);
         setFavs(favs.filter(f => f.biodataId !== biodataId));
     };
 

@@ -40,7 +40,7 @@ export default function BiodatasPage() {
   const fetchBiodatas = async () => {
     try {
       const { minAge, maxAge, type, division } = filters;
-      const res = await axios.get("http://localhost:3000/biodatas", {
+      const res = await axios.get("https://matrify-server.vercel.app/biodatas", {
         params: { minAge, maxAge, type, division },
       });
       setBiodatas(res.data);

@@ -52,7 +52,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/admin/stats");
+        const res = await axios.get("https://matrify-server.vercel.app/admin/stats");
         setStats({
           total: res.data.totalBiodata,
           male: res.data.maleBiodata,

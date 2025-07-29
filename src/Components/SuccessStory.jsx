@@ -7,7 +7,7 @@ const SuccessStory = () => {
     const [stories, setStories] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/success-stories")
+        axios.get("https://matrify-server.vercel.app/success-stories")
             .then(res => {
                 const sorted = res.data.sort(
                     (a, b) => new Date(b.marriageDate) - new Date(a.marriageDate)

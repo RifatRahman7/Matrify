@@ -15,7 +15,7 @@ const ManageUsers = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:3000/users/with-biodata")
+            .get("https://matrify-server.vercel.app/users/with-biodata")
             .then((res) => setUsers(res.data))
             .catch(() => setUsers([]))
             .finally(() => setLoading(false));
@@ -27,13 +27,13 @@ const ManageUsers = () => {
         setLoading(true);
         if (search.trim() === "") {
             axios
-                .get("http://localhost:3000/users/with-biodata")
+                .get("https://matrify-server.vercel.app/users/with-biodata")
                 .then((res) => setUsers(res.data))
                 .catch(() => setUsers([]))
                 .finally(() => setLoading(false));
         } else {
             axios
-                .get(`http://localhost:3000/users/search-with-biodata/${search}`)
+                .get(`https://matrify-server.vercel.app/users/search-with-biodata/${search}`)
                 .then((res) => setUsers(res.data))
                 .catch(() => setUsers([]))
                 .finally(() => setLoading(false));
@@ -52,7 +52,7 @@ const ManageUsers = () => {
         });
         if (result.isConfirmed) {
             try {
-                await axios.patch(`http://localhost:3000/users/admin/${email}`);
+                await axios.patch(`https://matrify-server.vercel.app/users/admin/${email}`);
                 setUsers((prev) =>
                     prev.map((u) =>
                         u.email === email ? { ...u, role: "admin" } : u
@@ -82,7 +82,7 @@ const ManageUsers = () => {
         });
         if (result.isConfirmed) {
             try {
-                await axios.patch(`http://localhost:3000/users/premium/${email}`);
+                await axios.patch(`https://matrify-server.vercel.app/users/premium/${email}`);
                 setUsers((prev) =>
                     prev.map((u) =>
                         u.email === email ? { ...u, isPremium: true } : u

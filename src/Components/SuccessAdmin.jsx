@@ -6,7 +6,7 @@ const SuccessAdmin = () => {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/success-stories")
+    axios.get("https://matrify-server.vercel.app/success-stories")
       .then(res => setStories(res.data));
   }, []);
 

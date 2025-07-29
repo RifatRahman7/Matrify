@@ -24,7 +24,7 @@ const GotMarried = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:3000/success-stories", {
+      await axios.post("https://matrify-server.vercel.app/success-stories", {
         ...form,
         userEmail: user?.email,
       });

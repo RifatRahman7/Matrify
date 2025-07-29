@@ -12,7 +12,7 @@ const PremiumMembers = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3000/premium-approved")
+            .get("https://matrify-server.vercel.app/premium-approved")
             .then((res) => {
                 setPremiumBiodatas(res.data.slice(-6).reverse());
             });

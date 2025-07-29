@@ -21,7 +21,7 @@ const CheckoutForm = ({ biodataId, userEmail }) => {
         setProcessing(true);
 
         try {
-            const { data: clientSecret } = await axios.post("http://localhost:3000/create-payment-intent", {
+            const { data: clientSecret } = await axios.post("https://matrify-server.vercel.app/create-payment-intent", {
                 amount: 500,
             });
 
@@ -36,7 +36,7 @@ const CheckoutForm = ({ biodataId, userEmail }) => {
                 return;
             }
 
-            await axios.post("http://localhost:3000/contact-requests", {
+            await axios.post("https://matrify-server.vercel.app/contact-requests", {
                 biodataId: Number(biodataId),
                 userEmail,
                 status: "pending",

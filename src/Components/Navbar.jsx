@@ -27,7 +27,7 @@ const Navbar = () => {
     useEffect(() => {
         if (user?.email) {
             axios
-                .get(`http://localhost:3000/users/${user.email}`)
+                .get(`https://matrify-server.vercel.app/users/${user.email}`)
                 .then(res => setDbUser(res.data))
                 .catch(() => setDbUser(null));
         }

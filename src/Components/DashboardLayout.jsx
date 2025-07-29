@@ -19,6 +19,7 @@ import AdminDashboard from "./AdminDashboard";
 import DashboardHome from "./DBHome";
 import { FcApprove } from "react-icons/fc";
 import { FaDiagramSuccessor } from "react-icons/fa6";
+import { useQuery } from "@tanstack/react-query";
 const userRoutes = [
     { name: "Dashboard Home", path: "/dashboard/user-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
     { name: "Edit Biodata", path: "/dashboard/edit-biodata", icon: <Edit className="w-5 h-5 mr-2" /> },
@@ -33,7 +34,7 @@ const adminRoutes = [
     { name: "Manage Users", path: "/dashboard/manage", icon: <User className="w-5 h-5 mr-2" /> },
     { name: "Approved Premium", path: "/dashboard/approvedPremium", icon: <FcApprove className="text-black w-5 h-5 mr-2" /> },
     { name: "Approved Contact Request", path: "/dashboard/approvedContactRequest", icon: <Mail className="w-5 h-5 mr-2" /> },
-     { name: "Success Story", path: "/dashboard/success-story", icon: <FaDiagramSuccessor className="w-5 h-5 mr-2" /> },
+    { name: "Success Story", path: "/dashboard/success-story", icon: <FaDiagramSuccessor className="w-5 h-5 mr-2" /> },
 ];
 
 const DashboardLayout = () => {
@@ -41,17 +42,15 @@ const DashboardLayout = () => {
     const navigate = useNavigate();
     const { logOut, user } = useContext(AuthContext);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [dbUser, setDbUser] = useState(null);
-
-    // Fetch user from MongoDB
-    useEffect(() => {
-        if (user?.email) {
-            axios
-                .get(`http://localhost:3000/users/${user.email}`)
-                .then(res => setDbUser(res.data))
-                .catch(() => setDbUser(null));
+    const { data: dbUser, isLoading } = useQuery({
+        queryKey: ['dbUser', user?.email],
+        enabled: !!user?.email,
+        queryFn: async () => {
+            const res = await axios.get(`https://matrify-server.vercel.app/users/${user.email}`);
+            return res.data;
         }
-    }, [user?.email]);
+    });
+
 
     const handleLogout = async () => {
         const result = await Swal.fire({
@@ -83,6 +82,14 @@ const DashboardLayout = () => {
     const displayEmail = dbUser?.email || user?.email || "";
     const isAdmin = dbUser?.role === "admin" || dbUser?.isAdmin;
     const sidebarRoutes = isAdmin ? adminRoutes : userRoutes;
+
+    if (isLoading || !dbUser) {
+        return (
+            <div className="min-h-screen flex items-center justify-center text-lg font-semibold text-gray-600">
+                Loading dashboard...
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 roboto">

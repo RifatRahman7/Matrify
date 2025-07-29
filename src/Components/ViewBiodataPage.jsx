@@ -12,7 +12,7 @@ const ViewBiodata = () => {
   // Fetch user's biodata
   useEffect(() => {
     if (user?.email) {
-      axios.get(`http://localhost:3000/biodatas/email/${user.email}`)
+      axios.get(`https://matrify-server.vercel.app/biodatas/email/${user.email}`)
         .then((res) => {
           setBiodata(res.data);
           setLoading(false);
@@ -34,7 +34,7 @@ const ViewBiodata = () => {
     });
     if (result.isConfirmed) {
       try {
-        await axios.patch(`http://localhost:3000/biodatas/request-premium/${Biodata.biodataId}`);
+        await axios.patch(`https://matrify-server.vercel.app/biodatas/request-premium/${Biodata.biodataId}`);
         Swal.fire({
           title: "Request Sent!",
           text: "Your biodata has been sent for premium approval.",
@@ -42,7 +42,7 @@ const ViewBiodata = () => {
           confirmButtonColor: "#16a34a",
         });
         // Refetch biodata to update UI
-        const res = await axios.get(`http://localhost:3000/biodatas/email/${user.email}`);
+        const res = await axios.get(`https://matrify-server.vercel.app/biodatas/email/${user.email}`);
         setBiodata(res.data);
       } catch (err) {
         Swal.fire({

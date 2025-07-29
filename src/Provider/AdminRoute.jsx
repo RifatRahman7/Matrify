@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
     let isMounted = true;
     if (user?.email) {
       setFetching(true);
-      fetch(`http://localhost:3000/users/${user.email}`)
+      fetch(`https://matrify-server.vercel.app/users/${user.email}`)
         .then(res => res.json())
         .then(data => {
           if (isMounted) setDbUser(data);

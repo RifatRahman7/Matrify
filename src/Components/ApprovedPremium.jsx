@@ -7,7 +7,7 @@ const ApprovedPremium = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/premium-requests")
+        axios.get("https://matrify-server.vercel.app/premium-requests")
             .then(res => setRequests(res.data))
             .finally(() => setLoading(false));
     }, []);
@@ -23,7 +23,7 @@ const ApprovedPremium = () => {
             confirmButtonText: "Yes, approve"
         });
         if (result.isConfirmed) {
-            await axios.patch(`http://localhost:3000/premium-requests/approve/${biodataId}`);
+            await axios.patch(`https://matrify-server.vercel.app/premium-requests/approve/${biodataId}`);
             setRequests(prev => prev.filter(r => r.biodataId !== biodataId));
             Swal.fire("Success!", "Biodata is now premium.", "success");
         }

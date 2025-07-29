@@ -23,7 +23,7 @@ const SuccessCounter = () => {
     });
 
     useEffect(() => {
-        axios.get("http://localhost:3000/admin/stats").then((res) => {
+        axios.get("https://matrify-server.vercel.app/admin/stats").then((res) => {
             setStats({
                 total: res.data.totalBiodata,
                 male: res.data.maleBiodata,

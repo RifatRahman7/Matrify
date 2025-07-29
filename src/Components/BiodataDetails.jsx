@@ -23,7 +23,7 @@ const BiodataDetailsPage = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/users/${user.email}`)
+        .get(`https://matrify-server.vercel.app/users/${user.email}`)
         .then(res => setDbUser(res.data))
         .catch(() => setDbUser(null));
     }
@@ -32,13 +32,13 @@ const BiodataDetailsPage = () => {
   // Fetch biodata details
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/biodatas/${biodataId}`)
+      .get(`https://matrify-server.vercel.app/biodatas/${biodataId}`)
       .then((res) => {
         setBiodata(res.data);
         setLoading(false);
         // Fetch similar biodatas
         axios 
-          .get("http://localhost:3000/biodatas", {
+          .get("https://matrify-server.vercel.app/biodatas", {
             params: {
               type: res.data.biodataType,
             },
@@ -61,7 +61,7 @@ const BiodataDetailsPage = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:3000/favourites", {
+      await axios.post("https://matrify-server.vercel.app/favourites", {
         userEmail: user.email,
         biodataId: biodata.biodataId,
       });

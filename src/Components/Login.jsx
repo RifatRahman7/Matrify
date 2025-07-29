@@ -48,7 +48,7 @@ const Login = () => {
       const user = result.user;
 
       // Add user to MongoDB users collection
-      await axios.post("http://localhost:3000/users", {
+      await axios.post("https://matrify-server.vercel.app/users", {
         name: user.displayName,
         email: user.email,
         photoURL: user.photoURL,

@@ -79,7 +79,7 @@ const EditBiodata = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/biodatas", formData);
+      const res = await axios.post("https://matrify-server.vercel.app/biodatas", formData);
 
       Swal.fire({
         title: "Success!",
