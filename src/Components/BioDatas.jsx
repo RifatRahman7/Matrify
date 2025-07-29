@@ -6,7 +6,7 @@ import {
   FaMapMarkerAlt,
   FaBriefcase,
   FaIdBadge,
-  FaArrowRight
+  FaArrowRight,
 } from "react-icons/fa";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -24,6 +24,9 @@ const divisions = [
 
 export default function BiodatasPage() {
   const [biodatas, setBiodatas] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const limit = 6;
   const [filters, setFilters] = useState({
     minAge: 18,
     maxAge: 40,
@@ -35,24 +38,25 @@ export default function BiodatasPage() {
   useEffect(() => {
     fetchBiodatas();
     // eslint-disable-next-line
-  }, [filters]);
+  }, [filters, page]);
 
   const fetchBiodatas = async () => {
     try {
       const { minAge, maxAge, type, division } = filters;
       const res = await axios.get("https://matrify-server.vercel.app/biodatas", {
-        params: { minAge, maxAge, type, division },
+        params: { minAge, maxAge, type, division, page, limit },
       });
-      setBiodatas(res.data);
+      console.log(res.data);
+      setBiodatas(res.data.biodatas || []);
+      setTotal(res.data.total || 0);
     } catch (error) {
       console.error("Failed to fetch biodatas", error);
     }
   };
-
+  console.log(biodatas);
   return (
     <div className="min-h-screen roboto flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50">
       <Navbar />
-
       <div className="flex flex-col lg:flex-row flex-grow p-4 gap-8 max-w-7xl mx-auto w-full">
         {/* Filter Sidebar */}
         <div className="w-full lg:w-72 bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-6 space-y-6 h-fit md:sticky top-24 border border-gray-100">
@@ -64,9 +68,10 @@ export default function BiodatasPage() {
               Biodata Type
             </label>
             <select
-              onChange={(e) =>
-                setFilters({ ...filters, type: e.target.value })
-              }
+              onChange={(e) => {
+                setPage(1);
+                setFilters({ ...filters, type: e.target.value });
+              }}
               className="mt-1 w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
               value={filters.type}
             >
@@ -80,9 +85,10 @@ export default function BiodatasPage() {
               Division
             </label>
             <select
-              onChange={(e) =>
-                setFilters({ ...filters, division: e.target.value })
-              }
+              onChange={(e) => {
+                setPage(1);
+                setFilters({ ...filters, division: e.target.value });
+              }}
               className="mt-1 w-full p-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-green-200"
               value={filters.division}
             >
@@ -129,7 +135,7 @@ export default function BiodatasPage() {
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {biodatas.length === 0 && (
             <div className="col-span-full text-center text-gray-600 text-lg py-16">
-             Loading Biodatas...
+              Loading Biodatas...
             </div>
           )}
           {biodatas.map((biodata) => (
@@ -137,7 +143,6 @@ export default function BiodatasPage() {
               key={biodata._id}
               className="relative group bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
             >
-              {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
               <img
                 src={biodata.profileImage}
@@ -175,7 +180,41 @@ export default function BiodatasPage() {
         </div>
       </div>
 
+      {/* Pagination Controls */}
+      {total > limit && (
+        <div className="w-full flex justify-center mt-8">
+          <div className="inline-flex items-center space-x-2 bg-white/80 px-4 py-2 rounded-xl shadow-lg border border-gray-200">
+            <button
+              disabled={page === 1}
+              onClick={() => setPage((prev) => prev - 1)}
+              className="px-3 py-1 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
+            >
+              Prev
+            </button>
+            {Array.from({ length: Math.ceil(total / limit) }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i + 1)}
+                className={`px-3 py-1 rounded-lg text-sm font-semibold ${page === i + 1
+                    ? "bg-green-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                  }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+            <button
+              disabled={page === Math.ceil(total / limit)}
+              onClick={() => setPage((prev) => prev + 1)}
+              className="px-3 py-1 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );
-};
+}
