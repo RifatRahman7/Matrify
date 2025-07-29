@@ -43,14 +43,19 @@ const DashboardLayout = () => {
     const { logOut, user, loading } = useContext(AuthContext);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [dbUser, setDbUser] = useState(null);
+    const [dbUserLoading, setDbUserLoading] = useState(true);
 
     // Fetch user from MongoDB
     useEffect(() => {
         if (user?.email) {
+            setDbUserLoading(true);
             axios
                 .get(`https://matrify-server.vercel.app/users/${user.email}`)
                 .then(res => setDbUser(res.data))
-                .catch(() => setDbUser(null));
+                .catch(() => setDbUser(null))
+                .finally(() => setDbUserLoading(false));
+        } else {
+            setDbUserLoading(false); 
         }
     }, [user?.email]);
 
@@ -84,13 +89,15 @@ const DashboardLayout = () => {
     const displayEmail = dbUser?.email || user?.email || "";
     const isAdmin = dbUser?.role === "admin" || dbUser?.isAdmin;
     const sidebarRoutes = isAdmin ? adminRoutes : userRoutes;
-    if (loading) {
+
+    if (loading || dbUserLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
-                <div className="text-lg text-gray-500">Loading...</div>
+                <div className="text-xl roboto text-gray-700">Loading...</div>
             </div>
         );
     }
+
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 roboto">
             <Navbar />
