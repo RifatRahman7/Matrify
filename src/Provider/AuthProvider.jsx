@@ -21,16 +21,16 @@ const AuthProvider = ({ children }) => {
     const createUser = async (email, password) => {
         setLoading(true);
         const result = await createUserWithEmailAndPassword(auth, email, password);
-        const idToken = await result.user.getIdToken();
-        localStorage.setItem("access-token", idToken);
+        // const idToken = await result.user.getIdToken();
+        // localStorage.setItem("access-token", idToken);
         return result;
     };
 
     const signIn = async (email, password) => {
         setLoading(true);
         const result = await signInWithEmailAndPassword(auth, email, password);
-        const idToken = await result.user.getIdToken();
-        localStorage.setItem("access-token", idToken);
+        // const idToken = await result.user.getIdToken();
+        // localStorage.setItem("access-token", idToken);
         return result;
     };
 
@@ -40,15 +40,15 @@ const AuthProvider = ({ children }) => {
 
     const logOut = async () => {
         await signOut(auth);
-        localStorage.removeItem("access-token");
+        // localStorage.removeItem("access-token");
     };
 
     const googleSignIn = async () => {
         setLoading(true);
         const googleProvider = new GoogleAuthProvider();
         const result = await signInWithPopup(auth, googleProvider);
-        const idToken = await result.user.getIdToken();
-        localStorage.setItem("access-token", idToken);
+        // const idToken = await result.user.getIdToken();
+        // localStorage.setItem("access-token", idToken);
         return result;
     };
 
