@@ -88,17 +88,29 @@ firebase-admin: For verifying Firebase tokens securely from the server
 
   ⚙️ How to Run Locally
 
-1. Clone the repo  
+
+1. Clone the repo
+  
 Navigate to client & install dependencies
 
 bash
+
 cd client
+
 npm install
+
 npm run dev
+
 Navigate to server & install dependencies
 
+
 bash
+
 cd server
+
 npm install
+
 npm run start
+
 Set environment variables in .env file (Firebase, Mongo URI, etc.)
+
