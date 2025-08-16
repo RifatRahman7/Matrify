@@ -69,9 +69,9 @@ const FaqSection = () => {
                   {faq.question}
                 </span>
                 {openIndex === idx ? (
-                  <FaChevronUp className="text-green-500 text-xl" />
+                  <FaChevronUp className="text-green-500 text-xl cursor-pointer" />
                 ) : (
-                  <FaChevronDown className="text-gray-400 text-xl" />
+                  <FaChevronDown className="text-gray-400 text-xl cursor-pointer" />
                 )}
               </button>
               <div

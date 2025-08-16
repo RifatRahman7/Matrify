@@ -9,6 +9,7 @@ import Footer from '../Components/Footer';
 import ReviewSection from '../Components/ReviewSection';
 import PromoSection from '../Components/PromoSection';
 import FaqSection from '../Components/FaqSection';
+import PartnersMediaSection from '../Components/PartnersMediaSection';
 
 const Home = () => {
     return (
@@ -20,6 +21,7 @@ const Home = () => {
             <SuccessCounter />
             <SuccessStory />
             <ReviewSection />
+            <PartnersMediaSection />
             <FaqSection />
             <PromoSection />
             <Footer />
