@@ -6,6 +6,9 @@ import HowItWorks from '../Components/HowItWorks';
 import SuccessCounter from '../Components/SuccessCounter';
 import SuccessStory from '../Components/SuccessStory';
 import Footer from '../Components/Footer';
+import ReviewSection from '../Components/ReviewSection';
+import PromoSection from '../Components/PromoSection';
+import FaqSection from '../Components/FaqSection';
 
 const Home = () => {
     return (
@@ -16,6 +19,9 @@ const Home = () => {
             <HowItWorks />
             <SuccessCounter />
             <SuccessStory />
+            <ReviewSection />
+            <FaqSection />
+            <PromoSection />
             <Footer />
         </div>
     );
