@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import Loader from "./Loader";
 
 const BiodataDetailsPage = () => {
   const { biodataId } = useParams();
@@ -80,7 +81,7 @@ const BiodataDetailsPage = () => {
   const isPremium = dbUser?.isPremium || dbUser?.role === "admin";
 
   if (loading) {
-    return <div className="text-center text-xl text-gray-600">Loading Biodata Details...</div>;
+    return <Loader />;
   }
 
   if (!biodata) {

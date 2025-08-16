@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaUsers, FaMars, FaVenus, FaCrown, FaDollarSign } from "react-icons/fa";
 import axios from "axios";
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
+import Loader from "./Loader";
 
 const StatCard = ({ icon, label, value, color }) => (
   <div className={`flex items-center gap-4 bg-white/80 backdrop-blur-lg rounded-xl shadow-xl border border-white/40 p-6`}>
@@ -69,7 +70,7 @@ const AdminDashboard = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-lg text-gray-500">Loading admin stats...</div>;
+    return <Loader />;
   }
 
   // Pie chart data

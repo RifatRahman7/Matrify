@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { LuCrown } from "react-icons/lu";
+import Loader from "./Loader";
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
@@ -121,7 +122,7 @@ const ManageUsers = () => {
                     </button>
                 </form>
                 {loading ? (
-                    <div className="text-center text-gray-500">Loading users...</div>
+                    <Loader />
                 ) : (
                     <>
                         {/* Table for md and up */}

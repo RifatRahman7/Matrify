@@ -19,6 +19,7 @@ import AdminDashboard from "./AdminDashboard";
 import DashboardHome from "./DBHome";
 import { FcApprove } from "react-icons/fc";
 import { FaDiagramSuccessor } from "react-icons/fa6";
+import Loader from "./Loader";
 
 const userRoutes = [
     { name: "Dashboard Home", path: "/dashboard/user-dashboard", icon: <Home className="w-5 h-5 mr-2" /> },
@@ -93,7 +94,7 @@ const DashboardLayout = () => {
     if (loading || dbUserLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
-                <div className="text-xl roboto text-gray-700">Loading...</div>
+                <Loader />
             </div>
         );
     }

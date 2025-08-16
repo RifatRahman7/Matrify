@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "./Loader";
 
 const ApprovedPremium = () => {
     const [requests, setRequests] = useState([]);
@@ -34,7 +35,7 @@ const ApprovedPremium = () => {
             <div className="w-full max-w-3xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Premium Approval Requests</h2>
                 {loading ? (
-                    <div className="text-center text-gray-500">Loading requests...</div>
+                    <Loader />
                 ) : requests.length === 0 ? (
                     <div className="text-center text-gray-500 py-8">No premium requests found.</div>
                 ) : (

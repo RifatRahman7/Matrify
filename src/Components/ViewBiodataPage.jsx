@@ -3,6 +3,7 @@ import axios from "axios";
 import { FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaBriefcase, FaIdBadge } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import Loader from "./Loader";
 
 const ViewBiodata = () => {
   const { user } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const ViewBiodata = () => {
   };
 
   if (loading) {
-    return <div className="text-center text-lg text-gray-500">Loading...</div>
+    return <Loader />;
   };
 
   if (!Biodata) {
