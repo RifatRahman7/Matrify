@@ -1,4 +1,4 @@
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Footer = () => {
@@ -29,10 +29,8 @@ const Footer = () => {
                 <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Support</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><Link to="/faq" className="hover:text-white transition">FAQ</Link></li>
-                        <li><Link to="/terms" className="hover:text-white transition">Terms & Conditions</Link></li>
-                        <li><Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
                         <li><Link to="/login" className="hover:text-white transition">Login</Link></li>
+                        <li>Email: support@matrify.com</li>
                     </ul>
                 </div>
 
@@ -40,10 +38,9 @@ const Footer = () => {
                 <div>
                     <h3 className="text-xl font-semibold text-white mb-3">Follow Us</h3>
                     <div className="flex space-x-4 mt-2">
-                        <a href="#" className="hover:text-white text-lg hover:scale-115"><FaFacebookF /></a>
-                        <a href="#" className="hover:text-white text-lg hover:scale-115"><FaInstagram /></a>
-                        <a href="#" className="hover:text-white text-lg hover:scale-115"><FaTwitter /></a>
-                        <a href="#" className="hover:text-white text-lg hover:scale-115"><FaLinkedinIn /></a>
+                        <a href="https://www.facebook.com/rifatdcian" target="_blank" className="hover:text-white text-lg hover:scale-115"><FaFacebookF /></a>
+                        <a href="https://github.com/RifatRahman7" target="_blank" className="hover:text-white text-lg hover:scale-115"><FaGithub/></a>
+                        <a href="https://www.linkedin.com/in/rifat-rahman7/" target="_blank" className="hover:text-white text-lg hover:scale-115"><FaLinkedinIn /></a>
                     </div>
                 </div>
             </div>

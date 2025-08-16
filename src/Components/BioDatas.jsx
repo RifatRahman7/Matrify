@@ -182,12 +182,12 @@ export default function BiodatasPage() {
 
       {/* Pagination Controls */}
       {total > limit && (
-        <div className="w-full flex justify-center mt-8">
+        <div className="w-full flex justify-center mt-8 mb-6">
           <div className="inline-flex items-center space-x-2 bg-white/80 px-4 py-2 rounded-xl shadow-lg border border-gray-200">
             <button
               disabled={page === 1}
               onClick={() => setPage((prev) => prev - 1)}
-              className="px-3 py-1 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
+              className="px-3 py-1 cursor-pointer rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
             >
               Prev
             </button>
@@ -195,7 +195,7 @@ export default function BiodatasPage() {
               <button
                 key={i}
                 onClick={() => setPage(i + 1)}
-                className={`px-3 py-1 rounded-lg text-sm font-semibold ${page === i + 1
+                className={`px-3 py-1 rounded-lg text-sm cursor-pointer font-semibold ${page === i + 1
                     ? "bg-green-500 text-white"
                     : "text-gray-700 hover:bg-gray-100"
                   }`}
@@ -206,7 +206,7 @@ export default function BiodatasPage() {
             <button
               disabled={page === Math.ceil(total / limit)}
               onClick={() => setPage((prev) => prev + 1)}
-              className="px-3 py-1 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
+              className="px-3 py-1 rounded-lg text-sm cursor-pointer font-semibold text-gray-700 hover:bg-gray-100 disabled:opacity-40"
             >
               Next
             </button>

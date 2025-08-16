@@ -22,6 +22,7 @@ import ApprovedContactRequest from "../Components/ApprovedContactRequest";
 import AdminDashboard from "../Components/AdminDashboard";
 import GotMarried from "../Components/GotMarried";
 import SuccessAdmin from "../Components/SuccessAdmin";
+import ErrorPage from "../Components/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path:"/*",
+        element:<ErrorPage />,
+    }
 ]);
 
 export default router;
