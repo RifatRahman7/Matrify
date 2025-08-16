@@ -20,8 +20,8 @@ const Home = () => {
             <HowItWorks />
             <SuccessCounter />
             <SuccessStory />
-            <ReviewSection />
             <PartnersMediaSection />
+             <ReviewSection />
             <FaqSection />
             <PromoSection />
             <Footer />

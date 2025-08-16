@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaTrash } from "react-icons/fa";
+import Loader from "./Loader";
 
 const MyFavourites = () => {
     const { user } = useContext(AuthContext);
@@ -57,7 +58,7 @@ const MyFavourites = () => {
                         ))}
                         {favs.length === 0 && (
                             <tr>
-                                <td colSpan={5} className="text-center py-8 text-gray-500">Loading...</td>
+                                <td colSpan={5} className="text-center py-8 text-gray-500"><Loader/></td>
                             </tr>
                         )}
                     </tbody>

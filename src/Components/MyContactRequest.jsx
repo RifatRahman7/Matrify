@@ -35,7 +35,6 @@ const MyContactRequest = () => {
         await axios.delete(`https://matrify-server.vercel.app/contact-requests/${id}`);
         setRequests(requests.filter(r => r._id !== id));
     };
-console.log(requests);
     return (
         <div className="max-w-3xl mx-auto bg-white/60 backdrop-blur-lg border border-white/30 p-6 rounded-2xl shadow-2xl mt-10">
             <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">My Contact Requests</h2>
@@ -86,7 +85,7 @@ console.log(requests);
                         ))}
                         {requests.length === 0 && (
                             <tr>
-                                <td colSpan={6} className="text-center py-8 text-gray-500"> Loading...</td>
+                                <td colSpan={6} className="text-center py-8 text-gray-500"> No contact Requests...</td>
                             </tr>
                         )}
                     </tbody>

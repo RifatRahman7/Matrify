@@ -27,7 +27,6 @@ const DashboardHomeRouter = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-lg text-gray-500">Loading dashboard...</div>
       </div>
     );
   }
