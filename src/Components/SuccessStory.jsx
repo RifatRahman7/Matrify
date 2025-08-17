@@ -18,13 +18,11 @@ const SuccessStory = () => {
   return (
     <section
       className="relative w-full max-w-5xl mx-auto py-12 roboto
-      bg-gradient-to-br from-pink-50 via-white to-yellow-50
       dark:bg-none dark:bg-slate-950"
     >
       {/* Light-mode blurred gradient */}
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-pink-200/40 via-white/60 to-yellow-200/40
-        blur-xl rounded-3xl dark:hidden"
+        className="absolute inset-0 -z-10 blur-xl rounded-3xl dark:hidden"
         style={{ filter: "blur(32px)" }}
       ></div>
 

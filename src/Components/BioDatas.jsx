@@ -156,17 +156,17 @@ export default function BiodatasPage() {
             <div
               key={biodata._id}
               className="relative group bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg 
-    rounded-2xl shadow-2xl border border-white/30 dark:border-slate-700 
-    p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+                rounded-2xl shadow-2xl dark:shadow-[0_0_20px_rgba(156,163,175,0.6)] dark:ring-1 dark:ring-gray-400 border border-white/30 dark:border-slate-700 
+                p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 dark:from-green-900/20 
-      via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
+                via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
 
               <img
                 src={biodata.profileImage}
                 alt="Profile"
                 className="w-28 h-28 rounded-full mx-auto object-cover shadow-lg 
-      border-4 border-green-200 dark:border-green-700 group-hover:border-green-400 transition"
+                border-4 border-green-200 group-hover:border-green-400 transition"
               />
               <h3 className="text-2xl mt-4 font-bold text-gray-800 dark:text-gray-100 flex items-center justify-center gap-2">
                 <FaUser className="text-green-500" />
@@ -178,13 +178,13 @@ export default function BiodatasPage() {
                 <span className="flex items-center gap-1 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800/60 px-3 py-1 rounded-full">
                   <FaIdBadge /> ID: {biodata.biodataId}
                 </span>
-                <span className="flex items-center gap-1 text-sm font-semibold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">
+                <span className="flex items-center gap-1 text-sm font-semibold bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">
                   <FaMapMarkerAlt /> {biodata.permanentDivision}
                 </span>
               </div>
 
               <div className="flex flex-wrap justify-center gap-2 mt-2">
-                <span className="flex items-center gap-1 text-sm font-semibold text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">
+                <span className="flex items-center gap-1 text-sm font-semibold bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">
                   Age: {biodata.age}
                 </span>
                 <span className="flex items-center gap-1 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-slate-800/60 px-3 py-1 rounded-full">
@@ -195,17 +195,14 @@ export default function BiodatasPage() {
               <button
                 onClick={() => navigate(`/biodatas/${biodata.biodataId}`)}
                 className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 
-  hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-full 
-  shadow-md text-sm transition mt-5"
+                hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-full 
+                shadow-md text-sm transition mt-5"
               >
                 <FaArrowRight className="text-sm" />
                 View Profile
               </button>
-
-
             </div>
           ))}
-
         </div>
       </div>
 

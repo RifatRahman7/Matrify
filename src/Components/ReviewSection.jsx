@@ -27,7 +27,7 @@ const ReviewSection = () => (
   <div className="relative w-full max-w-5xl mx-auto py-12 roboto">
     {/* Blurred background */}
     <div
-      className="absolute inset-0 -z-10 bg-gradient-to-br from-pink-200/40 via-white/60 to-yellow-200/40 dark:from-slate-800/60 dark:via-slate-900/80 dark:to-slate-800/60 blur-xl rounded-3xl"
+      className="absolute inset-0 -z-10 dark:from-slate-800/60 dark:via-slate-900/80 dark:to-slate-800/60 blur-xl rounded-3xl"
       style={{ filter: "blur(32px)" }}
     ></div>
 

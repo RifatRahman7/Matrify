@@ -42,14 +42,11 @@ const SuccessCounter = () => {
 
   return (
     <section
-      className="relative w-full max-w-5xl mx-auto py-12 roboto
-      bg-gradient-to-br from-green-50 via-white to-blue-50
-      dark:bg-none dark:bg-slate-950"
+      className="relative w-full max-w-5xl mx-auto py-12 roboto dark:bg-none dark:bg-slate-950"
     >
       {/* Light-mode blur only */}
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-200/40 via-white/60 to-green-200/40
-        blur-xl rounded-3xl dark:hidden"
+        className="absolute inset-0 -z-10 blur-xl rounded-3xl dark:hidden"
         style={{ filter: "blur(32px)" }}
       ></div>
 

@@ -90,7 +90,7 @@ const BiodataDetailsPage = () => {
             <img
               src={biodata.profileImage}
               alt="Profile"
-              className="w-32 h-32 rounded-full object-cover border-4 border-green-500 shadow mb-2"
+              className="w-32 h-32 rounded-full object-cover border-4 shadow mb-2"
             />
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <FaUser className="text-green-400" />

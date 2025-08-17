@@ -14,7 +14,7 @@ const PromoSection = () => {
       ></div>
 
       {/* Glassmorphism card */}
-      <div className="w-full max-w-3xl bg-white/40 dark:bg-slate-950/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 dark:border-slate-700 px-8 py-12 flex flex-col items-center transition-colors duration-500">
+      <div className="w-full max-w-5xl bg-white/40 dark:bg-slate-950/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 dark:border-slate-700 px-8 py-12 flex flex-col items-center transition-colors duration-500">
         <FaHeart className="text-pink-500 dark:text-pink-400 text-5xl mb-4 drop-shadow" />
         
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-4 tracking-tight">

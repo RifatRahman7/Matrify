@@ -18,13 +18,9 @@ const PremiumMembers = () => {
       });
   }, []);
 
-  // Sort biodatas by age
   const sortedBiodatas = [...premiumBiodatas].sort((a, b) => {
-    if (sortOrder === "asc") {
-      return a.age - b.age;
-    } else {
-      return b.age - a.age;
-    }
+    if (sortOrder === "asc") return a.age - b.age;
+    else return b.age - a.age;
   });
 
   return (
@@ -81,12 +77,13 @@ const PremiumMembers = () => {
               delay: idx * 0.12,
               type: "spring",
             }}
-            className="bg-white/90 dark:bg-slate-900 rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700 p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300"
+            className="bg-white/90 dark:bg-slate-900 rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700 p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300
+                       dark:shadow-[0_0_20px_rgba(156,163,175,0.6)] dark:ring-1 dark:ring-gray-400"
           >
             <img
               src={biodata.profileImage}
               alt={biodata.name}
-              className="w-24 h-24 rounded-full object-cover border-4 border-yellow-400 shadow mb-4"
+              className="w-24 h-24 rounded-full object-cover border-4 border-gray-400 shadow mb-4"
             />
             <div className="flex items-center gap-2 mb-2">
               <FaIdBadge className="text-blue-400" />
