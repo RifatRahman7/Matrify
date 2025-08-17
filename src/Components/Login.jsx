@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
+
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -47,7 +48,6 @@ const Login = () => {
       const result = await googleSignIn(provider);
       const user = result.user;
 
-      // Add user to MongoDB users collection
       await axios.post("https://matrify-server.vercel.app/users", {
         name: user.displayName,
         email: user.email,
@@ -71,17 +71,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 roboto">
+    <div className="min-h-screen flex flex-col justify-between bg dark:bg-slate-950 dark:text-gray-100 roboto">
       <ToastContainer theme="colored" />
+      
       {/* Navbar */}
       <Navbar />
 
       {/* Login Form Section */}
       <div className="flex-grow flex items-center justify-center px-4 mt-10 mb-10">
         <div className="flex flex-col lg:flex-row items-center gap-10">
+
+          {/* Image */}
           <div className="lg:block w-full max-w-md hidden lg:flex">
             <img
-              className="rounded-2xl shadow-2xl object-cover w-full h-[420px] border border-white/40"
+              className="rounded-2xl shadow-2xl object-cover w-full h-[420px] border border-white/40 dark:border-gray-700 dark:brightness-90"
               src="https://i.ibb.co/CpPDvgqh/login-image.jpg"
               alt="login"
               style={{ filter: "blur(0.5px) brightness(0.95)" }}
@@ -91,22 +94,22 @@ const Login = () => {
           {/* Login Form */}
           <form
             onSubmit={handleLogin}
-            className="w-full max-w-md bg-white/30 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 transition-all duration-500 hover:shadow-gray-400"
+            className="w-full max-w-md bg-white/30 dark:bg-slate-900 backdrop-blur-lg border border-white/30 dark:border-slate-800 shadow-2xl rounded-2xl p-8 transition-all duration-500 hover:shadow-gray-400 dark:hover:shadow-gray-600"
           >
-            <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-7 tracking-tight drop-shadow">
+            <h2 className="text-3xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-7 tracking-tight drop-shadow">
               Login to continue!
             </h2>
 
             {/* Email Input */}
             <div className="mb-4">
-              <label className="block text-gray-700 mb-1 font-medium" htmlFor="email">
+              <label className="block text-gray-700 dark:text-gray-200 mb-1 font-medium" htmlFor="email">
                 Email
               </label>
               <input
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="w-full px-4 py-2 bg-white/60 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                className="w-full px-4 py-2 bg-white/60 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 dark:text-gray-100 transition"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -115,14 +118,14 @@ const Login = () => {
 
             {/* Password Input */}
             <div className="mb-6">
-              <label className="block text-gray-700 mb-1 font-medium" htmlFor="password">
+              <label className="block text-gray-700 dark:text-gray-200 mb-1 font-medium" htmlFor="password">
                 Password
               </label>
               <input
                 id="password"
                 type="password"
                 placeholder="Enter your password"
-                className="w-full px-4 py-2 bg-white/60 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition"
+                className="w-full px-4 py-2 bg-white/60 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-900 dark:text-gray-100 transition"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -142,27 +145,27 @@ const Login = () => {
 
             {/* Divider */}
             <div className="flex items-center my-5">
-              <hr className="flex-grow border-t border-gray-300" />
-              <span className="mx-2 text-gray-500 font-medium">OR</span>
-              <hr className="flex-grow border-t border-gray-300" />
+              <hr className="flex-grow border-t border-gray-300 dark:border-slate-700" />
+              <span className="mx-2 text-gray-500 dark:text-gray-400 font-medium">OR</span>
+              <hr className="flex-grow border-t border-gray-300 dark:border-slate-700" />
             </div>
 
             {/* Google Sign-In */}
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full border border-gray-300 hover:border-gray-500 bg-white/70 text-gray-700 py-2 flex justify-center items-center rounded-lg transition duration-300 cursor-pointer shadow"
+              className="w-full border border-gray-300 dark:border-slate-700 hover:border-gray-500 dark:hover:border-slate-500 bg-white/70 dark:bg-slate-800 text-gray-700 dark:text-gray-100 py-2 flex justify-center items-center rounded-lg transition duration-300 cursor-pointer shadow"
             >
               <FcGoogle className="mr-2 text-xl" />
               Sign in with Google
             </button>
 
             {/* Register Link */}
-            <p className="text-center text-sm text-gray-700 mt-7">
+            <p className="text-center text-sm text-gray-700 dark:text-gray-300 mt-7">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className="text-green-700 hover:text-blue-700 font-semibold underline transition cursor-pointer"
+                className="text-green-700 dark:text-green-400 hover:text-blue-700 dark:hover:text-green-300 font-semibold underline transition cursor-pointer"
               >
                 Register Here
               </Link>

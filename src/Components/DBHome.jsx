@@ -9,25 +9,25 @@ const quickLinks = [
     name: "Edit Biodata",
     path: "/dashboard/edit-biodata",
     icon: <Edit className="w-6 h-6 text-green-600" />,
-    color: "from-green-100 to-green-50"
+    color: "dark:slate-900 dark:border dark:border-slate-800"
   },
   {
     name: "View Biodata",
     path: "/dashboard/view-biodata",
     icon: <User className="w-6 h-6 text-blue-600" />,
-    color: "from-blue-100 to-blue-50"
+    color: "dark:slate-900 dark:border dark:border-slate-800"
   },
   {
     name: "My Contact Request",
     path: "/dashboard/contact-request",
     icon: <Mail className="w-6 h-6 text-pink-600" />,
-    color: "from-pink-100 to-pink-50"
+    color: "dark:slate-900 dark:border dark:border-slate-800"
   },
   {
     name: "Favourite Biodatas",
     path: "/dashboard/favourites",
     icon: <Heart className="w-6 h-6 text-yellow-600" />,
-    color: "from-yellow-100 to-yellow-50"
+    color: "dark:slate-900 dark:border dark:border-slate-800"
   },
 ];
 
@@ -48,18 +48,18 @@ const DashboardHome = () => {
   const displayPhoto = dbUser?.photoURL || user?.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png";
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] dark:text-gray-100">
       <h1 className="text-4xl pb-3 font-bold">User Dashboard</h1>
-      <div className="w-full max-w-2xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 text-center">
+      <div className="w-full max-w-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-800 shadow-2xl rounded-2xl p-8 text-center">
         <img
           src={displayPhoto}
           alt="User"
-          className="w-20 h-20 rounded-full border-4 border-green-200 shadow mx-auto mb-4"
+          className="w-20 h-20 rounded-full border-4 border-green-200 dark:border-green-700 shadow mx-auto mb-4"
         />
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           Welcome, {displayName}!
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
           Manage your biodata, requests, and favourites from your dashboard.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
@@ -69,8 +69,8 @@ const DashboardHome = () => {
               to={link.path}
               className={`flex items-center gap-3 bg-gradient-to-br ${link.color} rounded-xl shadow p-4 hover:scale-105 transition`}
             >
-              <span className="bg-white/80 rounded-full p-2 shadow">{link.icon}</span>
-              <span className="font-semibold text-gray-800">{link.name}</span>
+              <span className="bg-white/80 dark:bg-slate-800 rounded-full p-2 shadow">{link.icon}</span>
+              <span className="font-semibold text-gray-800 dark:text-gray-100">{link.name}</span>
             </Link>
           ))}
         </div>

@@ -61,26 +61,26 @@ const ViewBiodata = () => {
 
   if (!Biodata) {
     return (
-      <div className="text-center text-lg text-gray-500">
+      <div className="text-center text-lg text-gray-500 dark:text-gray-300">
         No biodata found. Please create your biodata first.
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] roboto">
-      <div className="w-full max-w-2xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] roboto dark:text-gray-100">
+      <div className="w-full max-w-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-800 shadow-2xl rounded-2xl p-8">
         <div className="flex flex-col items-center mb-6">
           <img
             src={Biodata.profileImage}
             alt="Profile"
-            className="w-32 h-32 rounded-full object-cover border-4 border-green-200 shadow mb-2"
+            className="w-32 h-32 rounded-full object-cover border-4 border-green-200 dark:border-green-600 shadow mb-2"
           />
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <FaUser className="text-green-500" />
             {Biodata.name}
           </h2>
-          <span className="text-base text-gray-600">{Biodata.biodataType}</span>
+          <span className="text-base text-gray-600 dark:text-gray-300">{Biodata.biodataType}</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
