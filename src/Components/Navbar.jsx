@@ -14,6 +14,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import ModeButton from "./ModeButton";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -96,7 +97,7 @@ const Navbar = () => {
                             flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
                             ${isActive('/login')
                                 ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                                : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                                : 'text-gray-800 dark:text-gray-100 hover:bg-white/60 hover:shadow-md hover:text-green-700'
                             }
                         `}
                     >
@@ -109,7 +110,7 @@ const Navbar = () => {
                             flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
                             ${isActive('/register')
                                 ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                                : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                                : 'text-gray-800 dark:text-gray-100 hover:bg-white/60 hover:shadow-md hover:text-green-700'
                             }
                         `}
                     >
@@ -132,7 +133,7 @@ const Navbar = () => {
                         flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
                         ${isActive('/register')
                             ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                            : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                            : 'text-gray-800 dark:text-gray-100 hover:bg-white/60 hover:shadow-md hover:text-green-700'
                         }
                     `}
                 >
@@ -148,7 +149,7 @@ const Navbar = () => {
                         flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
                         ${isActive('/login')
                             ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                            : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                            : 'text-gray-800 dark:text-gray-100 hover:bg-white/60 hover:shadow-md hover:text-green-700'
                         }
                     `}
                 >
@@ -162,7 +163,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="sticky top-0 z-50 bg-white/40 backdrop-blur-xl shadow-lg border-b border-white/30">
+        <nav className="sticky top-0 z-50 bg-white/40 dark:bg-slate-950/90 backdrop-blur-xl shadow-lg border-b border-white/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
                 {/* Logo & Brand */}
                 <div className="flex items-center space-x-3">
@@ -171,7 +172,7 @@ const Navbar = () => {
                         alt="Matrify Logo"
                         className="w-11 h-11 rounded-full shadow-lg ring-2 ring-white/30"
                     />
-                    <span className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-green-600 via-blue-600 to-green-400 bg-clip-text text-transparent drop-shadow-lg">
+                    <span className="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-green-600 via-blue-600 to-green-400 bg-clip-text text-transparent drop-shadow-lg dark:text-gray-100">
                         Matrify
                     </span>
                 </div>
@@ -179,20 +180,22 @@ const Navbar = () => {
                 {/* Desktop Menu */}
                 <div className="hidden md:flex space-x-2 items-center">
                     {navItems.map(({ name, path, icon }, idx) => (
-                        <Link
-                            key={idx}
-                            to={path}
-                            className={`
-                                flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
-                                ${isActive(path)
-                                    ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
-                                    : 'text-gray-800 hover:bg-white/60 hover:shadow-md hover:text-green-700'
-                                }
-                            `}
-                        >
-                            {icon}
-                            {name}
-                        </Link>
+                        <React.Fragment key={idx}>
+                            <Link
+                                to={path}
+                                className={`
+                                    flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                                    ${isActive(path)
+                                        ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow-lg'
+                                        : 'text-gray-800 dark:text-gray-100 hover:bg-white/60 hover:shadow-md hover:text-green-700'
+                                    }
+                                `}
+                            >
+                                {icon}
+                                {name}
+                            </Link>
+                            {name === "Contact Us" && <ModeButton />}
+                        </React.Fragment>
                     ))}
                     {renderAuthButtons()}
                 </div>
@@ -202,7 +205,7 @@ const Navbar = () => {
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle Menu"
-                        className="text-gray-800 hover:text-green-700 transition"
+                        className="text-gray-800 dark:text-gray-100 hover:text-green-700 transition"
                     >
                         {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                     </button>
@@ -216,23 +219,25 @@ const Navbar = () => {
                     ${isOpen ? 'max-h-96 opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-90'}
                 `}
             >
-                <div className="px-4 pb-4 space-y-2 bg-white/70 backdrop-blur-xl rounded-b-2xl shadow-xl border-t border-white/20">
+                <div className="px-4 pb-4 space-y-2 bg-white/70 dark:bg-slate-950/90 backdrop-blur-xl rounded-b-2xl shadow-xl border-t border-white/20">
                     {navItems.map(({ name, path, icon }, idx) => (
-                        <Link
-                            key={idx}
-                            to={path}
-                            onClick={() => setIsOpen(false)}
-                            className={`
-                                flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
-                                ${isActive(path)
-                                    ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow'
-                                    : 'text-gray-800 hover:bg-white/80 hover:text-green-700'
-                                }
-                            `}
-                        >
-                            {icon}
-                            {name}
-                        </Link>
+                        <React.Fragment key={idx}>
+                            <Link
+                                to={path}
+                                onClick={() => setIsOpen(false)}
+                                className={`
+                                    flex items-center px-4 py-2 rounded-full font-medium transition-all duration-200
+                                    ${isActive(path)
+                                        ? 'bg-gradient-to-r from-green-500 to-blue-500 text-white shadow'
+                                        : 'text-gray-800 dark:text-gray-100 hover:bg-white/80 hover:text-green-700'
+                                    }
+                                `}
+                            >
+                                {icon}
+                                {name}
+                            </Link>
+                            {name === "Contact Us" && <ModeButton />}
+                        </React.Fragment>
                     ))}
                     <div className="flex flex-col space-y-2 mt-2">
                         {renderMobileAuthButtons()}

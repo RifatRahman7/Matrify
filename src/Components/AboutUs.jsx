@@ -22,37 +22,37 @@ const team = [
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 roboto">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 roboto">
       <Navbar />
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
-        <section className="w-full max-w-3xl mx-auto bg-white/40 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-8 md:p-12 text-center">
-          <h1 className="text-4xl md:text-4xl font-extrabold text-gray-800 mb-4 tracking-tight drop-shadow">
+        <section className="w-full max-w-3xl mx-auto bg-white/40 dark:bg-slate-900/70 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-8 md:p-12 text-center">
+          <h1 className="text-4xl md:text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-4 tracking-tight drop-shadow">
             About Matrify
           </h1>
-          <p className="text-lg text-gray-700 mb-8">
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
             Matrify is a modern matrimony platform built with the powerful MERN stack, designed to help you find your perfect life partner in a safe, respectful, and user-friendly environment.
           </p>
           <div className="flex flex-col md:flex-row gap-8 items-center justify-center mb-8">
             <img
               src="https://i.ibb.co/p9Q5WT4/matrimony-1.png"
               alt="Matrify Logo"
-              className="w-28 h-28 rounded-full shadow-lg border-4 border-white/60 mx-auto"
+              className="w-28 h-28 rounded-full shadow-lg border-4 border-white/60 dark:border-slate-700 mx-auto"
             />
             <div className="text-left md:text-left">
               <h2 className="text-2xl font-bold text-green-700 mb-2">Our Mission</h2>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-300">
                 To connect hearts and families by blending tradition with technology. We believe in genuine connections, privacy, and a seamless experience for everyone seeking a meaningful relationship.
               </p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-8">
-            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:shadow-3xl hover:scale-105 transition-all duration-300 group">
+            <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 dark:border-slate-700 hover:shadow-3xl hover:scale-105 transition-all duration-300 group">
               <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gradient-to-r from-green-400 to-blue-400 p-3 rounded-full shadow-lg">
                 <FaUsers className="text-white text-2xl" />
               </div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-2 mt-4 text-center">Why Choose Matrify?</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-1 mt-2">
+              <h3 className="text-xl font-semibold text-blue-700 dark:text-blue-400 mb-2 mt-4 text-center">Why Choose Matrify?</h3>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1 mt-2">
                 <li>Secure and private user profiles</li>
                 <li>Advanced search and matching algorithms</li>
                 <li>Easy-to-use, elegant interface</li>
@@ -60,12 +60,12 @@ const AboutUs = () => {
                 <li>Active support and guidance</li>
               </ul>
             </div>
-            <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 hover:scale-105  hover:shadow-3xl transition-all duration-300 group">
+            <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/50 dark:border-slate-700 hover:scale-105  hover:shadow-3xl transition-all duration-300 group">
               <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gradient-to-r from-green-400 to-blue-400 p-3 rounded-full shadow-lg">
                 <FaHeart className="text-white text-2xl" />
               </div>
-              <h3 className="text-xl font-semibold text-green-700 mb-2 mt-4 text-center">Our Values</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-1 mt-2">
+              <h3 className="text-xl font-semibold text-green-700 dark:text-green-400 mb-2 mt-4 text-center">Our Values</h3>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1 mt-2">
                 <li>Authenticity and trust</li>
                 <li>Respect and inclusivity</li>
                 <li>Privacy and safety</li>
@@ -82,29 +82,29 @@ const AboutUs = () => {
           </div>
           {/* Team Section */}
           <div className="mb-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Meet Our Team</h3>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Meet Our Team</h3>
             <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
               {team.map((member, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/70 backdrop-blur-lg rounded-xl hover:scale-105  shadow-2xl border border-white/40 p-5 flex flex-col items-center w-60 hover:shadow-2xl transition"
+                  className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg rounded-xl hover:scale-105 shadow-2xl border border-white/40 dark:border-slate-700 p-5 flex flex-col items-center w-60 hover:shadow-2xl transition"
                 >
                   <img
                     src={member.img}
                     alt={member.name}
-                    className="w-20 h-20 rounded-full object-cover border-4 border-green-200 shadow mb-3"
+                    className="w-20 h-20 rounded-full object-cover border-4 border-green-200 dark:border-green-700 shadow mb-3"
                   />
-                  <h4 className="text-lg font-semibold text-gray-800">{member.name}</h4>
-                  <p className="text-green-700 font-medium">{member.role}</p>
+                  <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{member.name}</h4>
+                  <p className="text-green-700 dark:text-green-400 font-medium">{member.role}</p>
                 </div>
               ))}
             </div>
           </div>
           <div className="mt-10">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">Join Us On Your Journey</h3>
-            <p className="text-gray-700">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Join Us On Your Journey</h3>
+            <p className="text-gray-700 dark:text-gray-300">
               Whether you’re searching for your soulmate or helping a loved one find theirs, Matrify is here to support you every step of the way. <br />
-              <span className="text-green-700 font-semibold">Start your story with us today.</span>
+              <span className="text-green-600 dark:text-green-400 font-semibold">Start your story with us today.</span>
             </p>
           </div>
         </section>
