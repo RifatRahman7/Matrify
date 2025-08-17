@@ -29,7 +29,6 @@ const Footer = () => {
                 <div>
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Support</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><Link to="/login" className="hover:text-gray-900 dark:hover:text-white transition">Login</Link></li>
                         <li className="text-gray-600 dark:text-gray-400">Email: support@matrify.com</li>
                     </ul>
                 </div>
