@@ -31,29 +31,29 @@ const ApprovedContactRequest = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] roboto">
-            <div className="w-full max-w-3xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Contact Request Approvals</h2>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] roboto bg-white/80 dark:bg-slate-900 rounded-2xl text-gray-900 dark:text-gray-100">
+            <div className="w-full max-w-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-6">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Contact Request Approvals</h2>
                 {loading ? (
                    <Loader />
                 ) : requests.length === 0 ? (
-                    <div className="text-center text-gray-500 py-8">No pending contact requests found.</div>
+                    <div className="text-center text-gray-500 dark:text-gray-400 py-8">No pending contact requests found.</div>
                 ) : (
                     <>
                         {/* Table for md and up */}
                         <div className="overflow-x-auto hidden md:block">
-                            <table className="min-w-full divide-y divide-gray-200 text-sm">
+                            <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-700 text-sm">
                                 <thead>
-                                    <tr className="bg-gradient-to-r from-green-100 to-blue-100">
-                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
-                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Email</th>
-                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Biodata Id</th>
-                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Approve</th>
+                                    <tr className="bg-gradient-to-r from-green-100 to-blue-100 dark:from-slate-800 dark:to-slate-900">
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-100">Name</th>
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-100">Email</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-100">Biodata Id</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-100">Approve</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {requests.map(r => (
-                                        <tr key={r._id} className="hover:bg-blue-50 transition">
+                                        <tr key={r._id} className="hover:bg-blue-50 dark:hover:bg-slate-800 transition">
                                             <td className="px-4 py-2">{r.name}</td>
                                             <td className="px-4 py-2">{r.contactEmail}</td>
                                             <td className="px-4 py-2 text-center">{r.biodataId}</td>
@@ -71,15 +71,15 @@ const ApprovedContactRequest = () => {
                             </table>
                         </div>
                         {/* Card system for small devices */}
-                        <div className="block md:hidden space-y-4 divide-y divide-gray-200">
+                        <div className="block md:hidden space-y-4 divide-y divide-gray-200 dark:divide-slate-700">
                             {requests.map(r => (
                                 <div
                                     key={r._id}
-                                    className="bg-white/90 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100"
+                                    className="bg-white/90 dark:bg-slate-900/70 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100 dark:border-slate-700"
                                 >
-                                    <div className="font-bold text-gray-800 text-lg">{r.name}</div>
-                                    <div className="text-sm text-gray-600 mb-1">{r.contactEmail}</div>
-                                    <div className="text-sm text-gray-500 mb-2">Biodata ID: {r.biodataId}</div>
+                                    <div className="font-bold text-gray-800 dark:text-gray-100 text-lg">{r.name}</div>
+                                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">{r.contactEmail}</div>
+                                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">Biodata ID: {r.biodataId}</div>
                                     <button
                                         onClick={() => handleApprove(r._id)}
                                         className="px-3 py-2 cursor-pointer rounded bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold hover:from-green-600 hover:to-blue-600 transition"

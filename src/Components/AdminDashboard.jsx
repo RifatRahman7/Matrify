@@ -81,7 +81,7 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center roboto min-h-[60vh] w-full dark:bg-slate-950/80 p-4 rounded-2xl">
+    <div className="flex flex-col items-center roboto min-h-[60vh] w-full dark:bg-slate-900/80 p-4 rounded-2xl">
       <div className="w-full max-w-5xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">Admin Dashboard</h2>
         <div className="text-center text-gray-500 dark:text-gray-300 mt-4 mb-4">

@@ -102,9 +102,10 @@ const ManageUsers = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[60vh] roboto">
-            <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg border border-white/30 shadow-2xl rounded-2xl p-6">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Manage Users</h2>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] roboto bg-white/80 dark:bg-slate-900 rounded-2xl text-gray-900 dark:text-gray-100">
+            <div className="w-full max-w-4xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-6">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Manage Users</h2>
+                
                 {/* Search Bar */}
                 <form onSubmit={handleSearch} className="flex items-center mb-4 max-w-xs mx-auto">
                     <input
@@ -112,7 +113,7 @@ const ManageUsers = () => {
                         placeholder="Search by name"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none"
+                        className="flex-1 px-3 py-2 border border-gray-300 dark:border-slate-700 rounded-l-lg focus:outline-none bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100"
                     />
                     <button
                         type="submit"
@@ -121,24 +122,25 @@ const ManageUsers = () => {
                         <FaSearch />
                     </button>
                 </form>
+
                 {loading ? (
                     <Loader />
                 ) : (
                     <>
                         {/* Table for md and up */}
                         <div className="overflow-x-auto hidden md:block">
-                            <table className="min-w-full divide-y divide-gray-200 text-sm">
+                            <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-700 text-sm">
                                 <thead>
-                                    <tr className="bg-gradient-to-r from-green-100 to-blue-100">
-                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Name</th>
-                                        <th className="px-4 py-2 text-left font-semibold text-gray-700">Email</th>
-                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Role</th>
-                                        <th className="px-4 py-2 text-center font-semibold text-gray-700">Premium</th>
+                                    <tr className="bg-gradient-to-r from-green-100 to-blue-100 dark:from-slate-800 dark:to-slate-900">
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-100">Name</th>
+                                        <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-100">Email</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-100">Role</th>
+                                        <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-100">Premium</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users.map((u) => (
-                                        <tr key={u.email} className="hover:bg-blue-50 transition">
+                                        <tr key={u.email} className="hover:bg-blue-50 dark:hover:bg-slate-800 transition">
                                             <td className="px-4 py-2 flex items-center gap-2">
                                                 <img
                                                     src={u.photoURL || "https://i.ibb.co/p9Q5WT4/matrimony-1.png"}
@@ -178,7 +180,7 @@ const ManageUsers = () => {
                                                         Make Premium
                                                     </button>
                                                 ) : (
-                                                    <span className="text-gray-400">-</span>
+                                                    <span className="text-gray-400 dark:text-gray-500">-</span>
                                                 )}
                                             </td>
                                         </tr>
@@ -186,18 +188,19 @@ const ManageUsers = () => {
                                 </tbody>
                             </table>
                             {users.length === 0 && (
-                                <div className="text-center text-gray-500 py-8">Search to find users...</div>
+                                <div className="text-center text-gray-500 dark:text-gray-400 py-8">Search to find users...</div>
                             )}
                         </div>
+
                         {/* Card system for small devices */}
-                        <div className="block md:hidden space-y-4 divide-y divide-gray-200">
+                        <div className="block md:hidden space-y-4 divide-y divide-gray-200 dark:divide-slate-700">
                             {users.length === 0 && (
-                                <div className="text-center text-gray-500 py-8">Search to find users...</div>
+                                <div className="text-center text-gray-500 dark:text-gray-400 py-8">Search to find users...</div>
                             )}
                             {users.map((u) => (
                                 <div
                                     key={u.email}
-                                    className="bg-white/90 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100"
+                                    className="bg-white/90 dark:bg-slate-900/70 rounded-xl shadow-lg p-4 flex flex-col gap-2 border border-gray-100 dark:border-slate-700"
                                 >
                                     <div className="flex items-center gap-3 mb-2">
                                         <img
@@ -206,8 +209,8 @@ const ManageUsers = () => {
                                             className="w-12 h-12 rounded-full border-2 border-green-200 shadow"
                                         />
                                         <div>
-                                            <div className="font-semibold text-gray-800">{u.name}</div>
-                                            <div className="text-xs text-gray-500">{u.email}</div>
+                                            <div className="font-semibold text-gray-800 dark:text-gray-100">{u.name}</div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">{u.email}</div>
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap gap-2 items-center">
@@ -241,7 +244,7 @@ const ManageUsers = () => {
                                                     Make Premium
                                                 </button>
                                             ) : (
-                                                <span className="text-gray-400">-</span>
+                                                <span className="text-gray-400 dark:text-gray-500">-</span>
                                             )}
                                         </div>
                                     </div>
