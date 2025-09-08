@@ -49,14 +49,14 @@ const DashboardHome = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] dark:text-gray-100">
-      <h1 className="text-4xl pb-3 font-bold">User Dashboard</h1>
+      <h1 className="text-3xl pb-3 font-bold">User Dashboard</h1>
       <div className="w-full max-w-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-800 shadow-2xl rounded-2xl p-8 text-center">
         <img
           src={displayPhoto}
           alt="User"
           className="w-20 h-20 rounded-full border-4 border-green-200 dark:border-green-700 shadow mx-auto mb-4"
         />
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           Welcome, {displayName}!
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">

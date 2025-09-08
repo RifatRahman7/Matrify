@@ -55,7 +55,7 @@ export default function BiodatasPage() {
   };
 
   return (
-    <div className="min-h-screen roboto flex flex-col 
+    <div className="min-h-screen flex flex-col 
       bg-gradient-to-br from-green-50 via-white to-blue-50 
       dark:bg-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-gray-900 dark:text-gray-100">
 
@@ -146,7 +146,7 @@ export default function BiodatasPage() {
         </div>
 
         {/* Biodata Cards */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-sm">
           {biodatas.length === 0 && (
             <div className="col-span-full text-center text-gray-600 dark:text-gray-300 text-lg py-16">
               <Loader />
@@ -157,7 +157,7 @@ export default function BiodatasPage() {
               key={biodata._id}
               className="relative group bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg 
                 rounded-2xl shadow-2xl dark:shadow-[0_0_20px_rgba(156,163,175,0.6)] dark:ring-1 dark:ring-gray-400 border border-white/30 dark:border-slate-700 
-                p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+                p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden text-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 dark:from-green-900/20 
                 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition pointer-events-none" />
@@ -168,7 +168,7 @@ export default function BiodatasPage() {
                 className="w-28 h-28 rounded-full mx-auto object-cover shadow-lg 
                 border-4 border-green-200 group-hover:border-green-400 transition"
               />
-              <h3 className="text-2xl mt-4 font-bold text-gray-800 dark:text-gray-100 flex items-center justify-center gap-2">
+              <h3 className="text-xl mt-4 font-bold text-gray-800 dark:text-gray-100 flex items-center justify-center gap-2">
                 <FaUser className="text-green-500" />
                 {biodata.name}
               </h3>
@@ -195,7 +195,7 @@ export default function BiodatasPage() {
               <button
                 onClick={() => navigate(`/biodatas/${biodata.biodataId}`)}
                 className="flex cursor-pointer items-center gap-2 bg-gradient-to-r from-green-500 to-blue-500 
-                hover:from-green-600 hover:to-blue-600 text-white font-semibold px-5 py-2 rounded-full 
+                hover:from-green-600 hover:to-blue-600 text-white font-semibold px-3 py-2 rounded-full 
                 shadow-md text-sm transition mt-5"
               >
                 <FaArrowRight className="text-sm" />

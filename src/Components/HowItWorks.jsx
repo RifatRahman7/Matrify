@@ -42,7 +42,7 @@ const steps = [
 const HowItWorks = () => {
   return (
     <section
-      className="relative py-20 px-4 md:px-8 roboto
+      className="relative py-20 px-4 md:px-8
       bg-gradient-to-br from-green-50 via-white to-blue-50 
       dark:from-slate-950 dark:via-slate-950 dark:to-black"
     >
@@ -62,7 +62,7 @@ const HowItWorks = () => {
           rounded-2xl shadow-xl border border-white/30 dark:border-slate-700 
           px-6 py-8 mx-auto"
         >
-          <h2 className="text-3xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-4 tracking-tight">
+          <h2 className="text-2xl md:text-2xl font-extrabold text-gray-800 dark:text-gray-100 mb-4 tracking-tight">
             <Typewriter
               words={["How Matrify Works"]}
               loop={0}
@@ -73,7 +73,7 @@ const HowItWorks = () => {
               delaySpeed={1500}
             />
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl">
+          <p className="text-gray-600 dark:text-gray-300 text-md md:text-md">
             A step-by-step guide to finding your perfect match on our platform.
           </p>
         </div>

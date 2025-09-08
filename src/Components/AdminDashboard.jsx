@@ -81,16 +81,16 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center roboto min-h-[60vh] w-full dark:bg-slate-900/80 p-4 rounded-2xl">
+    <div className="flex flex-col items-center min-h-[60vh] w-full dark:bg-slate-900/80 p-4 rounded-2xl">
       <div className="w-full max-w-5xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-8">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">Admin Dashboard</h2>
-        <div className="text-center text-gray-500 dark:text-gray-300 mt-4 mb-4">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">Admin Dashboard</h2>
+        <div className="text-center text-sm text-gray-500 dark:text-gray-300 mt-4 mb-4">
           Welcome, Admin! Here you can manage users, approve requests, and monitor platform stats.
         </div>
 
         <div className="flex flex-col md:flex-row gap-8 items-start justify-between">
           {/* Stat Cards */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 md:mb-0">
+          <div className="flex-1 text-sm grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 md:mb-0">
             <StatCard icon={<FaUsers />} label="Total Biodatas" value={stats.total} color="text-blue-400" />
             <StatCard icon={<FaCrown />} label="Premium Biodatas" value={stats.premium} color="text-yellow-400" />
             <StatCard icon={<FaMars />} label="Male Biodatas" value={stats.male} color="text-green-400" />

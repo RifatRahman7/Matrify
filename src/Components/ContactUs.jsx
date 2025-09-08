@@ -36,7 +36,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 roboto">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Navbar />
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
@@ -45,7 +45,7 @@ const ContactUs = () => {
             <span className="inline-flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-400 rounded-full p-3 shadow-lg mr-3">
               <Phone className="text-white w-7 h-7" />
             </span>
-            <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100 tracking-tight drop-shadow text-center">
+            <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 tracking-tight drop-shadow text-center">
               Contact Us
             </h1>
           </div>

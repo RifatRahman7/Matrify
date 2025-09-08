@@ -49,7 +49,7 @@ const partners = [
 ];
 
 const PartnersMediaSection = () => (
-  <div className="relative w-full max-w-5xl mx-auto py-10 flex flex-col items-center my-8 roboto">
+  <div className="relative w-full max-w-5xl mx-auto py-10 flex flex-col items-center my-8">
     {/* Blurred background */}
     <div
       className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-200/40 via-white/60 to-green-200/40 dark:from-slate-800/60 dark:via-slate-900/80 dark:to-slate-800/60 blur-xl rounded-3xl"
@@ -58,10 +58,10 @@ const PartnersMediaSection = () => (
 
     {/* Glassmorphism card */}
     <div className="w-full bg-white/40 dark:bg-slate-950/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 dark:border-slate-700 px-4 py-12 flex flex-col items-center">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-6 tracking-tight">
+      <h2 className="text-2xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6 tracking-tight">
         Our Partners & Media Mentions
       </h2>
-      <p className="text-gray-700 dark:text-gray-300 text-center text-lg md:text-xl mb-8">
+      <p className="text-gray-700 dark:text-gray-300 text-center text-md md:text-lg mb-8">
         Matrify is trusted and featured by leading media and partners.
       </p>
 

@@ -17,7 +17,7 @@ const SuccessStory = () => {
 
   return (
     <section
-      className="relative w-full max-w-5xl mx-auto py-12 roboto
+      className="relative w-full max-w-5xl mx-auto py-12
       dark:bg-none dark:bg-slate-950"
     >
       {/* Light-mode blurred gradient */}
@@ -33,7 +33,7 @@ const SuccessStory = () => {
           rounded-2xl shadow-xl border border-white/30 dark:border-slate-700
           px-6 py-6 inline-block"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 m-0">
+          <h2 className="text-2xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-100 m-0">
             <Typewriter
               words={["Matrify Success Stories"]}
               loop={0}

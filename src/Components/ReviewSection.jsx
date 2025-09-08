@@ -24,7 +24,7 @@ const reviews = [
 ];
 
 const ReviewSection = () => (
-  <div className="relative w-full max-w-5xl mx-auto py-12 roboto">
+  <div className="relative w-full max-w-5xl mx-auto py-12">
     {/* Blurred background */}
     <div
       className="absolute inset-0 -z-10 dark:from-slate-800/60 dark:via-slate-900/80 dark:to-slate-800/60 blur-xl rounded-3xl"
@@ -34,7 +34,7 @@ const ReviewSection = () => (
     {/* Title */}
     <div className="flex justify-center mb-8">
       <div className="bg-white/30 dark:bg-slate-950/70 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 dark:border-slate-700 px-6 py-6 inline-block transition-colors duration-500">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 m-0">
+        <h2 className="text-2xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-100 m-0">
           <Typewriter
             words={["What Our Users Say", "Users Review", "Matrify Experiences"]}
             loop={0}

@@ -54,7 +54,7 @@ const BannerSlider = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10" />
               <div className="relative z-20 max-w-3xl mx-auto px-8 py-10 rounded-2xl bg-white/30 backdrop-blur-md shadow-2xl border border-white/30 text-center">
-                <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight">
+                <h2 className="text-3xl md:text-3xl font-extrabold mb-6 text-white drop-shadow-lg tracking-tight">
                   <Typewriter
                     words={[slide.title]}
                     loop={0}
@@ -65,7 +65,7 @@ const BannerSlider = () => {
                     delaySpeed={2000}
                   />
                 </h2>
-                <p className="text-lg md:text-2xl text-white/90 font-medium drop-shadow">
+                <p className="text-lg md:text-xl text-white/90 font-medium drop-shadow">
                   <Typewriter
                     words={[slide.description]}
                     loop={0}

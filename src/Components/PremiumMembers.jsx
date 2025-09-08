@@ -24,7 +24,7 @@ const PremiumMembers = () => {
   });
 
   return (
-    <div className="relative max-w-6xl mx-auto py-10 roboto">
+    <div className="relative max-w-6xl mx-auto py-10">
       {/* Background Blur */}
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-200/40 via-white/60 to-green-200/40 dark:from-slate-900 dark:via-slate-950 dark:to-black blur-xl rounded-3xl"
@@ -33,7 +33,7 @@ const PremiumMembers = () => {
 
       {/* Header */}
       <div className="mx-auto max-w-2xl bg-green-100/30 dark:bg-slate-900/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 dark:border-slate-700 px-6 py-6 mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-2">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-2">
           <Typewriter
             words={["Premium Members"]}
             loop={0}

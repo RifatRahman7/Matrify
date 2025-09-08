@@ -22,12 +22,12 @@ const team = [
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 roboto">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <Navbar />
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
         <section className="w-full max-w-3xl mx-auto bg-white/40 dark:bg-slate-900/70 backdrop-blur-lg border border-white/30 dark:border-slate-700 shadow-2xl rounded-2xl p-8 md:p-12 text-center">
-          <h1 className="text-4xl md:text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-4 tracking-tight drop-shadow">
+          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-4 tracking-tight drop-shadow">
             About Matrify
           </h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">

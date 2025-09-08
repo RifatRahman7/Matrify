@@ -42,7 +42,7 @@ const SuccessCounter = () => {
 
   return (
     <section
-      className="relative w-full max-w-5xl mx-auto py-12 roboto dark:bg-none dark:bg-slate-950"
+      className="relative w-full max-w-5xl mx-auto py-12 dark:bg-none dark:bg-slate-950"
     >
       {/* Light-mode blur only */}
       <div
@@ -57,7 +57,7 @@ const SuccessCounter = () => {
           rounded-2xl shadow-xl border border-white/30 dark:border-slate-700
           px-6 py-6 inline-block"
         >
-          <div className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-gray-100">
+          <div className="text-2xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
             <Typewriter
               words={["Matrify Success in Numbers"]}
               loop={0}

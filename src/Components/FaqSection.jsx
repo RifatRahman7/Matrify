@@ -37,7 +37,7 @@ const FaqSection = () => {
   };
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto py-6 my-6 roboto p-5">
+    <div className="relative w-full max-w-5xl mx-auto py-6 my-6 p-5">
       {/* Blurred background */}
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-200/40 via-white/60 to-green-200/40 dark:from-slate-800/60 dark:via-slate-900/80 dark:to-slate-800/60 blur-xl rounded-3xl"
@@ -48,10 +48,10 @@ const FaqSection = () => {
       <div className="w-full bg-white/40 dark:bg-slate-950/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/30 dark:border-slate-700 px-8 py-12 transition-colors duration-500">
         <div className="flex flex-col items-center mb-8">
           <FaQuestionCircle className="text-blue-500 dark:text-blue-400 text-5xl mb-2 drop-shadow" />
-          <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-800 dark:text-gray-100 mb-2 tracking-tight">
+          <h2 className="text-2xl md:text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-2 tracking-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-700 dark:text-gray-300 text-center text-lg md:text-xl">
+          <p className="text-gray-700 dark:text-gray-300 text-center text-md md:text-md">
             Everything you need to know about Matrify.
           </p>
         </div>
@@ -66,19 +66,19 @@ const FaqSection = () => {
                 onClick={() => toggle(idx)}
                 className="flex items-center justify-between w-full px-6 py-4 text-left focus:outline-none"
               >
-                <span className="font-semibold text-gray-800 dark:text-gray-100 text-lg flex items-center gap-2">
+                <span className="font-semibold text-gray-800 dark:text-gray-100 text-md flex items-center gap-2">
                   <FaQuestionCircle className="text-green-500 dark:text-green-400" />
                   {faq.question}
                 </span>
                 {openIndex === idx ? (
-                  <FaChevronUp className="text-green-500 dark:text-green-400 text-xl cursor-pointer" />
+                  <FaChevronUp className="text-green-500 dark:text-green-400 text-md cursor-pointer" />
                 ) : (
-                  <FaChevronDown className="text-gray-400 dark:text-gray-500 text-xl cursor-pointer" />
+                  <FaChevronDown className="text-gray-400 dark:text-gray-500 text-md cursor-pointer" />
                 )}
               </button>
 
               <div
-                className={`px-6 pb-4 text-gray-700 dark:text-gray-300 text-base transition-all duration-300 ${
+                className={`px-6 pb-4 text-gray-700 dark:text-gray-300 text-md transition-all duration-300 ${
                   openIndex === idx
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0 overflow-hidden"

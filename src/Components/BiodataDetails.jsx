@@ -82,7 +82,7 @@ const BiodataDetailsPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col dark:bg-slate-950 text-gray-100 roboto">
+    <div className="min-h-screen flex flex-col dark:bg-slate-950 text-gray-100">
       <Navbar />
       <div className="flex flex-col items-center justify-center flex-1 py-10">
         <div className="w-full max-w-2xl bg-white text-gray-900 dark:bg-slate-950/80 backdrop-blur-lg dark:border dark:border-slate-700 shadow-2xl rounded-2xl p-8 dark:text-gray-100">

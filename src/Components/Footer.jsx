@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-100 dark:bg-slate-950 text-gray-700 dark:text-gray-300 py-10 px-6 md:px-12 roboto transition-colors duration-500">
+        <footer className="bg-gray-100 dark:bg-slate-950 text-gray-700 dark:text-gray-300 py-10 px-6 md:px-12 transition-colors duration-500">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
                 {/* Branding */}

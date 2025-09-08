@@ -68,7 +68,7 @@ const ViewBiodata = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] roboto dark:text-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] dark:text-gray-100">
       <div className="w-full max-w-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border border-white/30 dark:border-slate-800 shadow-2xl rounded-2xl p-8">
         <div className="flex flex-col items-center mb-6">
           <img
@@ -76,7 +76,7 @@ const ViewBiodata = () => {
             alt="Profile"
             className="w-32 h-32 rounded-full object-cover border-4 border-green-200 dark:border-green-600 shadow mb-2"
           />
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <FaUser className="text-green-500" />
             {Biodata.name}
           </h2>

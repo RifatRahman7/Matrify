@@ -100,7 +100,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 roboto">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 transition-colors duration-500 text-sm">
       <Navbar />
 
       {/* Mobile Hamburger */}
